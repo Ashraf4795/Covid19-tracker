@@ -1,0 +1,7 @@
+api
+
+global : https://disease.sh/v2/all
+countries : https://disease.sh/v2/countries
+search by country :https://disease.sh/v2/countries/egypt
+statistics : https://disease.sh/v2/historical/egypt
+global statistics : https://disease.sh/v2/historical/all
