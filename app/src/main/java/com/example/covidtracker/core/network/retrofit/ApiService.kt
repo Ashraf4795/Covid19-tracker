@@ -1,6 +1,7 @@
 package com.example.covidtracker.core.network.retrofit
 
 import com.example.covidtracker.core.models.CountryData
+import com.example.covidtracker.core.models.CountryHistorcalData
 import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.core.models.GlobalHistoricalData
 import retrofit2.http.GET
@@ -26,5 +27,11 @@ interface ApiService {
     //get global history
     @GET("/v2/historical/all?lastdays=0")
     suspend fun getGlobalHistoricalData ():GlobalHistoricalData
+
+    //get Country history
+    @GET("v2/historical/{country}?lastdays=0")
+    suspend fun getCountryHistoricalData (
+        @Path("country") countryName:String
+    ):CountryHistorcalData
 
 }
