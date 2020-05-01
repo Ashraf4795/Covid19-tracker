@@ -2,7 +2,6 @@ package com.example.covidtracker.core.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
 @Entity(tableName = "countryInfo")
 data class CountryInfo(
     var _id: Int,

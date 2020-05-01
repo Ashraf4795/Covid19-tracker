@@ -21,6 +21,3 @@ data class GlobalData(
     @PrimaryKey
     val updated: Long
 )
-//{
-//    constructor() : this(0,0,0,0,0,0,0,0,0,0.0,0,0,0)
-//}

@@ -2,6 +2,7 @@ package com.example.covidtracker.core.local
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.covidtracker.core.models.CountryData
 import com.example.covidtracker.core.models.GlobalData
@@ -9,7 +10,7 @@ import com.example.covidtracker.core.models.GlobalData
 @Dao
 interface Dao{
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGlobal(globalData: GlobalData)
 
     @Query("Select * from globalData")

@@ -25,7 +25,3 @@ data class CountryData(
     @PrimaryKey
     val updated: Long
 )
-//{
-//    constructor():this(0,0,0,"","", CountryInfo(),0,0,0,0,0,0,0,
-//        0,0)
-//}
