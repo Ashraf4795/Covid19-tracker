@@ -8,6 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.covidtracker.R
 import com.example.covidtracker.core.ViewModelFactory
+import com.example.covidtracker.core.local.AppDataBase
+import com.example.covidtracker.core.local.DatabaseBuilder
+import com.example.covidtracker.core.local.LocalDataBase
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
 import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
 import com.example.covidtracker.utils.Status.SUCCESS
@@ -31,7 +34,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             this,
-            ViewModelFactory(RetrofitApiHelper(RetrofitBuilder.apiService))
+            ViewModelFactory(RetrofitApiHelper(RetrofitBuilder.apiService),
+                LocalDataBase(DatabaseBuilder.getInstance(this)))
         ).get(MainViewModel::class.java)
     }
 
@@ -40,7 +44,30 @@ class MainActivity : AppCompatActivity() {
             it?.let { resource ->
                 when (resource.status) {
                     SUCCESS -> {
-                        resource.data?.let { globalData -> textView.text = globalData.toString() }
+                       resource.data?.let { globalData ->viewModel.InsertGlobalDat(globalData)
+                           viewModel.getGlobalDataFromDb().observe(this, Observer {
+                               Log.d("ddddd","ddddddddddddddddddddddd")
+
+                               it?.let { resource ->
+                                   when (resource.status) {
+                                       SUCCESS -> {
+                                           resource.data?.let { globalData ->textView.text=globalData.toString()
+                                               Log.d("dataaaaaaa",globalData.toString())
+
+
+                                           }
+                                       }
+                                       ERROR -> {
+                                           Log.e("Main", it.message)
+                                           Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                                       }
+                                       LOADING -> {
+                                           Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                                       }
+                                   }
+                               }
+                           })
+                        }
                     }
                     ERROR -> {
                         Log.e("Main", it.message)
@@ -52,5 +79,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
     }
 }

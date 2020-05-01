@@ -1,5 +1,10 @@
 package com.example.covidtracker.core.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.Expose
+
+@Entity(tableName = "globalData")
 data class GlobalData(
     val active: Int,
     val affectedCountries: Int,
@@ -13,5 +18,9 @@ data class GlobalData(
     val testsPerOneMillion: Double,
     val todayCases: Int,
     val todayDeaths: Int,
+    @PrimaryKey
     val updated: Long
 )
+//{
+//    constructor() : this(0,0,0,0,0,0,0,0,0,0.0,0,0,0)
+//}

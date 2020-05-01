@@ -1,10 +1,17 @@
 package com.example.covidtracker.core.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "countryInfo")
 data class CountryInfo(
-    val _id: Int,
-    val flag: String,
-    val iso2: String,
-    val iso3: String,
-    val lat: Double,
-    val long: Double
+    var _id: Int,
+    var flag: String,
+    var iso2: String,
+    var iso3: String,
+    var lat: Double,
+    var long: Double
 )
+{
+    constructor():this(0,"","","",0.0,0.0)
+}
