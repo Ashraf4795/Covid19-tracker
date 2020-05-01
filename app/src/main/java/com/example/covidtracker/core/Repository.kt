@@ -3,6 +3,7 @@ package com.example.covidtracker.core
 import com.example.covidtracker.core.local.LocalDataBaseContract
 import com.example.covidtracker.core.models.CountryData
 import com.example.covidtracker.core.models.GlobalData
+import com.example.covidtracker.core.models.GlobalHistoricalData
 import com.example.covidtracker.core.network.NetworkServiceContract
 
 
@@ -45,6 +46,10 @@ class Repository(val networkContract : NetworkServiceContract,val localContract:
     suspend fun deleteCountriesFromDataBase() {
         localContract.deleteCountries()
     }
+
+    //get global historical data
+    suspend fun  getGlobalHistoricalData():GlobalHistoricalData =
+        networkContract.getGlobalHistoricalData()
 
 
 
