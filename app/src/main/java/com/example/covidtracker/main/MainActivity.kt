@@ -36,9 +36,13 @@ class MainActivity : AppCompatActivity() {
                 when(resource.status) {
                     Status.SUCCESS ->{
                         resource?.data.let {
-                            textView.text = it.toString()
+                            it?.let {
+                                textView.text = it.toString()
+                            }
                         }
                     }
+                    Status.ERROR->{}
+                    Status.LOADING->{}
                 }
             }
         })

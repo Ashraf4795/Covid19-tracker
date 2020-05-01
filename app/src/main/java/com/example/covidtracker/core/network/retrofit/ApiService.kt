@@ -24,7 +24,7 @@ interface ApiService {
 
 
     //get global history
-    @GET("/v2/historical/all")
+    @GET("/v2/historical/all?lastdays=0")
     suspend fun getGlobalHistoricalData ():GlobalHistoricalData
 
 }
