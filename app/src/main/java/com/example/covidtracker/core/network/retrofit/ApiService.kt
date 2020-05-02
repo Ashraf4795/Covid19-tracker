@@ -21,8 +21,7 @@ interface ApiService {
     suspend fun getCountryData (
         @Path("country") countryName:String
     ) : CountryData
-
-
+    
     //get global history
     @GET("/v2/historical/all?lastdays=0")
     suspend fun getGlobalHistoricalData ():GlobalHistoricalData
