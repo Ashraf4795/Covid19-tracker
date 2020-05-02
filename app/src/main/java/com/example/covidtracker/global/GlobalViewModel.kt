@@ -52,5 +52,14 @@ class GlobalViewModel (val repository: Repository) :ViewModel(){
         }
     }
 
+    fun getCountryHistoricalData(countryName : String) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = repository.getCountryHistoricalData(countryName)))
+        }catch (exception:Exception){
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
 
 }

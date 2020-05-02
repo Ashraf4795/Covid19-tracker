@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
         setupViewModel()
 
         network.setOnClickListener{
-            setUI()
+            //setUI()
+            setUIForCountryHistory("Egypt")
         }
     }
 
@@ -48,6 +49,23 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun setUIForCountryHistory(countryName:String) {
+        viewModel.getCountryHistoricalData(countryName).observe(this, Observer {
+            it?.let {resource ->
+                when(resource.status) {
+                    Status.SUCCESS ->{
+                        resource?.data.let {
+                            it?.let {
+                                textView.text = it.timeline.casesMap.toString()
+                            }
+                        }
+                    }
+                    Status.ERROR->{}
+                    Status.LOADING->{}
+                }
+            }
+        })
+    }
     private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
             this,
