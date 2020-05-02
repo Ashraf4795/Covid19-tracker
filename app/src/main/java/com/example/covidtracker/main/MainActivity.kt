@@ -12,12 +12,16 @@ import com.example.covidtracker.R
 import com.example.covidtracker.core.ViewModelFactory
 import com.example.covidtracker.core.local.DatabaseBuilder
 import com.example.covidtracker.core.local.LocalDataBase
+import com.example.covidtracker.core.models.SubscripEntity
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
 import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
 import com.example.covidtracker.core.notification.NotificationCreator
 import com.example.covidtracker.global.GlobalViewModel
 import com.example.covidtracker.utils.Status
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 
