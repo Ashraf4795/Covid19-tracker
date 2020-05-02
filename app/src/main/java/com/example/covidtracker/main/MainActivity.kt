@@ -2,18 +2,19 @@ package com.example.covidtracker.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.covidtracker.R
 import com.example.covidtracker.core.ViewModelFactory
 import com.example.covidtracker.core.local.DatabaseBuilder
 import com.example.covidtracker.core.local.LocalDataBase
-import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
 import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
 import com.example.covidtracker.global.GlobalViewModel
 import com.example.covidtracker.utils.Status
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,11 +25,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setupViewModel()
-
+        setUpUpdateWorker()
         network.setOnClickListener{
             //setUI()
             setUIForCountryHistory("Egypt")
         }
+
+    }
+
+    private fun setUpUpdateWorker() {
+        viewModel.startUpdateWorker(5,TimeUnit.MINUTES,this)
     }
 
     private fun setUI() {

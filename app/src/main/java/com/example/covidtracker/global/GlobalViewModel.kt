@@ -1,5 +1,6 @@
 package com.example.covidtracker.global
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.covidtracker.core.Repository
@@ -7,7 +8,9 @@ import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.viewModelScope
+import com.example.covidtracker.core.workManager.worker.UpdateWorker
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 
 // global fragment viewModel
@@ -60,6 +63,11 @@ class GlobalViewModel (val repository: Repository) :ViewModel(){
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
+
+    fun startUpdateWorker (interval:Long,timeUnit: TimeUnit,context: Context) {
+        UpdateWorker.run(interval, timeUnit,context)
+    }
+
 
 
 }
