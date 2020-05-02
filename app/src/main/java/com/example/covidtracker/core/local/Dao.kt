@@ -19,7 +19,7 @@ interface Dao{
     @Query("delete from globalData")
     suspend fun deleteGlobal()
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCountry(countriesData: List<CountryData>)
 
     @Query("Select * from country")

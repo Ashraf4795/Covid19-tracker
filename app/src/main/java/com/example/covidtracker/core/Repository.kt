@@ -1,12 +1,15 @@
 package com.example.covidtracker.core
 
+import android.util.Log
 import com.example.covidtracker.core.local.LocalDataBaseContract
 import com.example.covidtracker.core.models.CountryData
 import com.example.covidtracker.core.models.CountryHistorcalData
 import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.core.models.GlobalHistoricalData
 import com.example.covidtracker.core.network.NetworkServiceContract
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 
 class Repository(val networkContract : NetworkServiceContract,val localContract:LocalDataBaseContract){
@@ -56,6 +59,28 @@ class Repository(val networkContract : NetworkServiceContract,val localContract:
     suspend fun  getCountryHistoricalData(countryName: String):CountryHistorcalData =
         networkContract.getCountryHistoricalData(countryName)
 
+
+
+    //refresh data function
+
+    suspend fun refreshData () {
+        val countriesData = GlobalScope.async(Dispatchers.IO) {
+            getCountriesDataFromNetwork()
+        }.await()
+
+        val globalData = GlobalScope.async(Dispatchers.IO) {
+            getGlobalDataFromNetwork()
+        }.await()
+
+        if (countriesData.count()>0) {
+            Log.d("refresh","insert countries :: " + countriesData.toString())
+            insertCountiesToDataBase(countriesData)
+        }
+        Log.d("refresh","insert GlobapData :: " + globalData.toString())
+        insertGlobalToDataDase(globalData)
+
+
+    }
 
 
 }
