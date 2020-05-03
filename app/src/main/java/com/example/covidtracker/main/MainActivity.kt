@@ -9,9 +9,12 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.covidtracker.R
+import com.example.covidtracker.core.INTERVAL_KEY
+import com.example.covidtracker.core.PREFERENCE_KEY
 import com.example.covidtracker.core.ViewModelFactory
 import com.example.covidtracker.core.local.DatabaseBuilder
 import com.example.covidtracker.core.local.LocalDataBase
+import com.example.covidtracker.core.local.shardPreference.SharedPreferenceBuilder
 import com.example.covidtracker.core.models.SubscripEntity
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
 import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
@@ -38,12 +41,13 @@ class MainActivity : AppCompatActivity() {
             //setUI()
            // setUIForCountryHistory("Egypt")
             startNotification()
+
         }
 
     }
 
     private fun setUpUpdateWorker() {
-        viewModel.startUpdateWorker(5,TimeUnit.MINUTES,this)
+        viewModel.startUpdateWorker(2,TimeUnit.MINUTES,this)
     }
 
     private fun setUI() {

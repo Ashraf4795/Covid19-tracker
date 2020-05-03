@@ -8,6 +8,9 @@ import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.viewModelScope
+import com.example.covidtracker.core.INTERVAL_KEY
+import com.example.covidtracker.core.PREFERENCE_KEY
+import com.example.covidtracker.core.local.shardPreference.SharedPreferenceBuilder
 import com.example.covidtracker.core.models.SubscripEntity
 import com.example.covidtracker.core.workManager.worker.UpdateWorker
 import kotlinx.coroutines.GlobalScope
@@ -67,8 +70,14 @@ class GlobalViewModel (val repository: Repository) :ViewModel(){
         }
     }
 
+    //start worker from sharedPrefernce
     fun startUpdateWorker (interval:Long,timeUnit: TimeUnit,context: Context) {
-        UpdateWorker.run(interval, timeUnit,context)
+        SharedPreferenceBuilder(context, PREFERENCE_KEY).saveIntervalAndUpdateWorkerRequest(INTERVAL_KEY,interval,timeUnit)
+    }
+
+    //update interval data
+    fun updateIntervalValue (interval: Long,timeUnit: TimeUnit,context: Context){
+        SharedPreferenceBuilder(context, PREFERENCE_KEY).saveIntervalAndUpdateWorkerRequest(INTERVAL_KEY,interval,timeUnit)
     }
 
     // insert to subscrip table
@@ -77,6 +86,7 @@ class GlobalViewModel (val repository: Repository) :ViewModel(){
             repository.insertToSubscripTable(subscripEntity)
         }
     }
+
 
 
 
