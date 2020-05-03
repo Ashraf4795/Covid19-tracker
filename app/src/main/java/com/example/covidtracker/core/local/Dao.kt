@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.covidtracker.core.models.CountryData
 import com.example.covidtracker.core.models.GlobalData
+import com.example.covidtracker.core.models.SubscripEntity
 
 @Dao
 interface Dao{
@@ -28,4 +29,10 @@ interface Dao{
     @Query("delete from country")
     suspend fun deleteCountries()
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertToSubscripTable(subscripEntity:SubscripEntity)
+
+    //get subscriped country
+    @Query("SELECT * FROM subscribTable")
+    suspend fun getSubscripedCountry():List<SubscripEntity>
 }

@@ -1,5 +1,6 @@
 package com.example.covidtracker.main
 
+import android.app.NotificationManager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,15 +9,22 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.covidtracker.R
+import com.example.covidtracker.core.INTERVAL_KEY
+import com.example.covidtracker.core.PREFERENCE_KEY
 import com.example.covidtracker.core.ViewModelFactory
 import com.example.covidtracker.core.local.DatabaseBuilder
 import com.example.covidtracker.core.local.LocalDataBase
+import com.example.covidtracker.core.local.shardPreference.SharedPreferenceBuilder
+import com.example.covidtracker.core.models.SubscripEntity
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
 import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
 import com.example.covidtracker.core.notification.NotificationCreator
 import com.example.covidtracker.global.GlobalViewModel
 import com.example.covidtracker.utils.Status
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 
@@ -33,12 +41,13 @@ class MainActivity : AppCompatActivity() {
             //setUI()
            // setUIForCountryHistory("Egypt")
             startNotification()
+
         }
 
     }
 
     private fun setUpUpdateWorker() {
-        viewModel.startUpdateWorker(5,TimeUnit.MINUTES,this)
+        viewModel.startUpdateWorker(2,TimeUnit.MINUTES,this)
     }
 
     private fun setUI() {

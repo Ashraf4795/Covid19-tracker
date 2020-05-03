@@ -1,10 +1,9 @@
 package com.example.covidtracker.core.workManager.worker
 
 import android.content.Context
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.work.*
 import com.example.covidtracker.core.Repository
+import com.example.covidtracker.core.UPDATE_WORKER_ID
 import com.example.covidtracker.core.local.DatabaseBuilder
 import com.example.covidtracker.core.local.LocalDataBase
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
@@ -30,7 +29,7 @@ class UpdateWorker (context: Context,workerParameters: WorkerParameters): Corout
                 .build()
 
             WorkManager.getInstance(context)
-                .enqueueUniquePeriodicWork("updateWorker",ExistingPeriodicWorkPolicy.KEEP
+                .enqueueUniquePeriodicWork(UPDATE_WORKER_ID,ExistingPeriodicWorkPolicy.REPLACE
                     ,updateDataRequest)
 
         }
