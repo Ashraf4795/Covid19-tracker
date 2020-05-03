@@ -6,9 +6,11 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.example.covidtracker.R
+import java.net.URI
 
 class NotificationCreator {
 
@@ -24,6 +26,8 @@ class NotificationCreator {
             setChannelId(channelId)
             setContentIntent(pendingIntent)
             setAutoCancel(true)
+            setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM))
+            setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             priority = NotificationCompat.PRIORITY_DEFAULT // 7
 
         }.build()
