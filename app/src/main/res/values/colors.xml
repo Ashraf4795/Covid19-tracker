@@ -3,4 +3,31 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <!-- app colors -->
+    <color name="primeRed">#FF4947</color>
+
+    <color name="pink">#FFC8C7</color>
+
+    <color name="gray">#00000029</color>
+
+    <color name="textBlack">#212121</color>
+
+    <color name="darkGray">#747474</color>
+
+    <color name="yellow">#F1CE1F</color>
+
+    <color name="topCountryText">#212121</color>
+
+    <color name="badgeColor">#02B686</color>
+
+    <color name="topCountryBG">#a8e6cf</color>
+
+    <color name="confirmedColor">#418BCA</color>
+
+    <color name="recoveryColor">#02B686</color>
+
+    <color name="backgroundColor">#FFFFFF</color>
+
+    <color name="shadowColor">#00000029</color>
 </resources>

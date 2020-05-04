@@ -6,18 +6,18 @@ import com.google.gson.annotations.Expose
 
 @Entity(tableName = "globalData")
 data class GlobalData(
-    val active: Int,
+    val active: Long,
     val affectedCountries: Int,
-    val cases: Int,
+    val cases: Long,
     val casesPerOneMillion: Int,
-    val critical: Int,
-    val deaths: Int,
+    val critical: Long,
+    val deaths: Long,
     val deathsPerOneMillion: Int,
-    val recovered: Int,
-    val tests: Int,
+    val recovered: Long,
+    val tests: Long,
     val testsPerOneMillion: Double,
-    val todayCases: Int,
-    val todayDeaths: Int,
+    val todayCases: Long,
+    val todayDeaths: Long,
     @PrimaryKey
     val updated: Long
 )
