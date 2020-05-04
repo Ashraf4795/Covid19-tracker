@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="13dp"
-            android:text="5416516612"
+            android:text="@string/dot"
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="18sp"
@@ -52,6 +52,7 @@
 
     <!--Recovered-->
     <LinearLayout
+        android:id="@+id/recoverLayoutId"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -71,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="13dp"
-            android:text="5416516612"
+            android:text="@string/dot"
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="18sp"
@@ -83,6 +84,7 @@
 
         <!--deaths-->
         <LinearLayout
+            android:id="@+id/deathLayoutId"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -102,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="13dp"
-                android:text="5416516612"
+                android:text="@string/dot"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textSize="18sp"

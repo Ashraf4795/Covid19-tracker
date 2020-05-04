@@ -12,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <FrameLayout
                 android:layout_width="match_parent"
@@ -40,6 +40,16 @@
                     android:text="@string/covid19"
                     android:textColor="@color/textBlack"
                     android:textSize="27sp" />
+
+                <ProgressBar
+                    android:id="@+id/progressBarId"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:progressBackgroundTint="@color/primeRed"/>
+
             </FrameLayout>
             <TextView
                 android:id="@+id/textView3"
@@ -86,6 +96,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
