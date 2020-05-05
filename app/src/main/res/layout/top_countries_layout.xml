@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="6dp"
     app:cardElevation="3dp"
+    android:layout_marginEnd="5dp"
     app:cardBackgroundColor="@color/topCountryBG">
 
     <LinearLayout
@@ -21,10 +22,11 @@
             android:paddingEnd="16dp">
             <ImageView
                 android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
                 android:src="@drawable/country_flag"/>
                 <TextView
+                    android:id="@+id/countryName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="USA"
@@ -35,13 +37,14 @@
                     android:layout_marginEnd="20dp"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/countryCases"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1M"
             android:textSize="12sp"
             android:textColor="@color/textBlack"
             android:fontFamily="@font/tajawalbold"
-            android:paddingStart="16dp"
+            android:paddingStart="23dp"
             android:paddingTop="4dp"
             android:paddingBottom="8dp"/>
     </LinearLayout>
