@@ -91,7 +91,7 @@
                 android:text="@string/topCountries"
                 style="@style/textHeader"/>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/topCountriesListId"
+                android:id="@+id/topCountriesRecyclerViewId"
                 android:layout_width="match_parent"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"

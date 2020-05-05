@@ -1,6 +1,7 @@
 package com.example.covidtracker.global
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.covidtracker.core.Repository
@@ -12,7 +13,6 @@ import com.example.covidtracker.core.INTERVAL_KEY
 import com.example.covidtracker.core.PREFERENCE_KEY
 import com.example.covidtracker.core.local.shardPreference.SharedPreferenceBuilder
 import com.example.covidtracker.core.models.SubscripEntity
-import com.example.covidtracker.core.workManager.worker.UpdateWorker
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -21,6 +21,8 @@ import java.util.concurrent.TimeUnit
 
 // global fragment viewModel
 class GlobalViewModel (val repository: Repository) :ViewModel(){
+
+    val globalMutableData:MutableLiveData<GlobalData> = MutableLiveData()
 
     fun getGlobalDataFromNetwork() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
