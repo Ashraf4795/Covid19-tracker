@@ -66,7 +66,7 @@ class Repository(val networkContract : NetworkServiceContract,val localContract:
     suspend fun getSubscripedCountries() = localContract.getSubscriptedCountry()
 
     //refresh data function
-    suspend fun refreshData () {
+    suspend fun refreshData ():Pair<GlobalData,List<CountryData>>{
         val countriesData = GlobalScope.async(Dispatchers.IO) {
             getCountriesDataFromNetwork()
         }.await()
@@ -81,8 +81,7 @@ class Repository(val networkContract : NetworkServiceContract,val localContract:
         }
         Log.d("refresh","insert GlobapData :: " + globalData.toString())
         insertGlobalToDataDase(globalData)
-
-
+        return Pair(globalData,countriesData)
     }
 
 

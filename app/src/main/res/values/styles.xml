@@ -32,9 +32,14 @@
     </style>
 
     <style name="totalStatisticsBtnStyle" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:maxLines">1</item>
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/tajawalblack</item>
         <item name="background">@color/backgroundColor</item>
         <item name="textAllCaps">false</item>
+        <item name="autoSizeMinTextSize">11sp</item>
+        <item name="autoSizeMaxTextSize">18sp</item>
     </style>
+
+
 </resources>

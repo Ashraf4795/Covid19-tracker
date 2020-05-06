@@ -23,10 +23,10 @@
         android:id="@+id/navigationViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
         app:itemIconTint="@color/nav_bar_color_select"
         app:itemTextColor="@color/nav_bar_color_select"
         app:menu="@menu/bottom_menu"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

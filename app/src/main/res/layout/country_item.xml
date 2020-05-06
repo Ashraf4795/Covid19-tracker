@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/countryItemColor"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="@color/pink">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight=".55">
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:src="@drawable/country_flag"/>
+        <TextView
+            android:id="@+id/countryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USA"
+            android:textSize="18sp"
+            android:textColor="@color/textBlack"
+            android:fontFamily="@font/tajawalbold"
+            android:layout_marginStart="4dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/confirmTextViewId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="999M"
+            android:textSize="14sp"
+            android:textColor="@color/countryItemTextColor"
+            android:fontFamily="@font/tajawalblack"
+            android:layout_weight=".15"/>
+
+        <TextView
+            android:id="@+id/recoveredTextViewId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="999M"
+            android:textSize="14sp"
+            android:textColor="@color/countryItemTextColor"
+            android:fontFamily="@font/tajawalblack"
+            android:layout_weight=".15"/>
+
+        <TextView
+            android:id="@+id/deathTextViewId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="999M"
+            android:textSize="14sp"
+            android:textColor="@color/countryItemTextColor"
+            android:fontFamily="@font/tajawalblack"
+            android:layout_weight=".15"/>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

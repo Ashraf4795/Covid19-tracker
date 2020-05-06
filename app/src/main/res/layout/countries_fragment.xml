@@ -1,6 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/background_pic" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:padding="16dp"
+                android:src="@drawable/ic_settings" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/tajawalbold"
+                    android:text="@string/covid19"
+                    android:textColor="@color/textBlack"
+                    android:textSize="27sp" />
+
+                <include layout="@layout/total_card" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/searchInputLayoutId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@color/white"
+                    android:hint="@string/EnterSearchText"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/searchEditTextId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/allChipBtn"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/chip_shape"
+                    android:fontFamily="@font/tajawalbold"
+                    android:text="@string/all"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textBlack"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/africaChipBtn"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/chip_shape"
+                    android:fontFamily="@font/tajawalbold"
+                    android:text="@string/africa"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textBlack"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/europeChipBtn"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/chip_shape"
+                    android:fontFamily="@font/tajawalbold"
+                    android:text="@string/Europe"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textBlack"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/northAmaricaChipBtn"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/chip_shape"
+                    android:fontFamily="@font/tajawalbold"
+                    android:text="@string/northAmarica"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textBlack"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/southAmaricaChipBtn"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/chip_shape"
+                    android:fontFamily="@font/tajawalbold"
+                    android:text="@string/southAmarica"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textBlack"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/australiaChipBtn"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/chip_shape"
+                    android:fontFamily="@font/tajawalbold"
+                    android:text="@string/Australia"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textBlack"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="20dp"
+            android:weightSum="1">
+
+            <TextView
+                style="@style/statisticsCardHeaderStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".70"
+                android:text="@string/country"
+                android:textColor="@color/textBlack" />
+
+            <TextView
+                style="@style/statisticsCardHeaderStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".10"
+                android:text="@string/confirmed"
+                android:textColor="@color/textBlack" />
+
+            <TextView
+                style="@style/statisticsCardHeaderStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".10"
+                android:text="@string/recovery"
+                android:textColor="@color/textBlack" />
+            <TextView
+                style="@style/statisticsCardHeaderStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".10"
+                android:text="@string/Deaths"
+                android:textColor="@color/textBlack" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/countriesRecyclerViewId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" />
+    </LinearLayout>
+</ScrollView>

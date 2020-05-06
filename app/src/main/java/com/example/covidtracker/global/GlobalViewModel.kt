@@ -12,6 +12,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.covidtracker.core.INTERVAL_KEY
 import com.example.covidtracker.core.PREFERENCE_KEY
 import com.example.covidtracker.core.local.shardPreference.SharedPreferenceBuilder
+import com.example.covidtracker.core.models.CountryData
 import com.example.covidtracker.core.models.SubscripEntity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -23,6 +24,15 @@ import java.util.concurrent.TimeUnit
 class GlobalViewModel (val repository: Repository) :ViewModel(){
 
     val globalMutableData:MutableLiveData<GlobalData> = MutableLiveData()
+
+    fun getGlobalDataWithCountriesData()= liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = repository.refreshData()))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
 
     fun getGlobalDataFromNetwork() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))

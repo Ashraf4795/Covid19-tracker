@@ -23,6 +23,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dot">.</string>
+    <string name="all">All</string>
 
-
+    <!--contenient names-->
+    <string name="africa">Africa</string>
+    <string name="Europe">Europe</string>
+    <string name="asia">Asia</string>
+    <string name="northAmarica">North Amarica</string>
+    <string name="southAmarica">South Amarica</string>
+    <string name="Australia">Australia</string>
+    <string name="EnterSearchText">Enter Country to search</string>
 </resources>

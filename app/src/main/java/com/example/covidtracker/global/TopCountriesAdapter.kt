@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.covidtracker.R
 import com.example.covidtracker.core.models.CountryData
+import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.utils.Helper
 import kotlinx.android.synthetic.main.top_countries_layout.view.*
 
@@ -22,9 +23,9 @@ class TopCountriesAdapterAdapter(val items : ArrayList<CountryData>, val context
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.countryName.text=items.get(position).country
+        holder.countryName.text= items[position].country
         holder.countryCases.text= Helper.convertNumber(items.get(position).cases)
-        Glide.with(context).load(items.get(position).countryInfo.flag).into(holder.countryFlag)
+        Glide.with(context).load(items[position].countryInfo.flag).into(holder.countryFlag)
     }
 }
 
