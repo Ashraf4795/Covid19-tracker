@@ -83,7 +83,7 @@
             android:scrollbars="none">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -175,16 +175,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
             android:weightSum="1">
 
             <TextView
                 style="@style/statisticsCardHeaderStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".70"
+                android:layout_weight=".60"
                 android:text="@string/country"
                 android:textColor="@color/textBlack" />
 
@@ -192,7 +192,7 @@
                 style="@style/statisticsCardHeaderStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".10"
+                android:layout_weight=".13"
                 android:text="@string/confirmed"
                 android:textColor="@color/textBlack" />
 
@@ -200,14 +200,14 @@
                 style="@style/statisticsCardHeaderStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".10"
+                android:layout_weight=".13"
                 android:text="@string/recovery"
                 android:textColor="@color/textBlack" />
             <TextView
                 style="@style/statisticsCardHeaderStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".10"
+                android:layout_weight=".13"
                 android:text="@string/Deaths"
                 android:textColor="@color/textBlack" />
         </LinearLayout>
@@ -216,6 +216,6 @@
             android:id="@+id/countriesRecyclerViewId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp" />
+            android:layout_margin="10dp" />
     </LinearLayout>
 </ScrollView>

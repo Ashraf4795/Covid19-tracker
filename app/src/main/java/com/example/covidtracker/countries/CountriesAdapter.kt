@@ -23,10 +23,14 @@ class CountriesAdapter (val items : ArrayList<CountryData>, val context: Context
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.countryName.text= items[position].country
-        holder.countryCases.text= Helper.convertNumber(items.get(position).cases)
+//        holder.countryCases.text= Helper.convertNumber(items.get(position).cases)
+//        holder.countryRecoverd.text= Helper.convertNumber(items.get(position).recovered)
+//        holder.countryDeaths.text=Helper.convertNumber(items.get(position).deaths)
+        holder.countryCases.text= "${items.get(position).cases}"
+        holder.countryRecoverd.text= "${items.get(position).recovered}"
+        holder.countryDeaths.text= "${items.get(position).deaths}"
         Glide.with(context).load(items[position].countryInfo.flag).into(holder.countryFlag)
-        holder.countryRecoverd.text=Helper.convertNumber(items.get(position).recovered)
-        holder.countryDeaths.text=Helper.convertNumber(items.get(position).deaths)
+
     }
 }
 

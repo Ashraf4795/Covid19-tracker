@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covidtracker.R
@@ -20,6 +21,7 @@ import com.example.covidtracker.core.models.CountryData
 import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
 import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
+import com.example.covidtracker.setting.SettingFragment
 import com.example.covidtracker.utils.Helper
 import com.example.covidtracker.utils.Status
 import kotlinx.android.synthetic.main.active_serious_layout.*
@@ -60,6 +62,11 @@ class GlobalFragment : Fragment() {
         }
         totalBtnId.setOnClickListener{
             setUpUI(globalData)
+        }
+
+        settingBtnId.setOnClickListener{
+            val toSettingAction = GlobalFragmentDirections.actionGlobalFragmentToSettingFragment()
+            it.findNavController().navigate(toSettingAction)
         }
     }
 

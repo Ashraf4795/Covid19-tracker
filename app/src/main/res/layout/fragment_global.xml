@@ -24,7 +24,7 @@
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/background_pic" />
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/settingBtnId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"

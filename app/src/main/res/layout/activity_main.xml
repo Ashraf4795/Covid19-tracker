@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.MainActivity">
+    tools:context=".main.MainActivity"
+    android:background="@color/white">
 
 
     <fragment
@@ -26,7 +27,7 @@
         app:itemIconTint="@color/nav_bar_color_select"
         app:itemTextColor="@color/nav_bar_color_select"
         app:menu="@menu/bottom_menu"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/countryItemColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -38,6 +39,7 @@
         android:background="@drawable/refresh"
         app:layout_constraintBottom_toTopOf="@+id/navigationViewId"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/navigationViewId" />
 
