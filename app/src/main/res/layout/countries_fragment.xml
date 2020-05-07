@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/background_pic" />
+                app:srcCompat="@drawable/countries_background" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -49,25 +49,30 @@
 
                 <include layout="@layout/total_card" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/searchInputLayoutId"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
-                    android:background="@color/white"
-                    android:hint="@string/EnterSearchText"
-                    app:boxCornerRadiusBottomEnd="10dp"
-                    app:boxCornerRadiusBottomStart="10dp"
-                    app:boxCornerRadiusTopEnd="10dp"
-                    app:boxCornerRadiusTopStart="10dp">
+                    android:background="@drawable/round_edit_text"
+                    android:weightSum="1">
+                    <AutoCompleteTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".98"
+                        android:background="#00000000"
+                        android:maxLines="1"
+                        android:padding="6dp"
+                        android:layout_marginStart="8dp"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/searchEditTextId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/search_icon" />
+                </LinearLayout>
 
-                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </FrameLayout>
 
@@ -128,7 +133,7 @@
                     android:text="@string/northAmarica"
                     android:textAllCaps="false"
                     android:textColor="@color/textBlack"
-                    android:textSize="12sp" />
+                    android:textSize="10sp" />
 
                 <Button
                     android:id="@+id/southAmaricaChipBtn"
@@ -140,7 +145,7 @@
                     android:text="@string/southAmarica"
                     android:textAllCaps="false"
                     android:textColor="@color/textBlack"
-                    android:textSize="12sp" />
+                    android:textSize="10sp" />
 
                 <Button
                     android:id="@+id/australiaChipBtn"

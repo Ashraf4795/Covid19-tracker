@@ -8,9 +8,7 @@ import android.view.ViewGroup
 
 import com.example.covidtracker.R
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class CountryFragment : Fragment() {
 
     override fun onCreateView(
