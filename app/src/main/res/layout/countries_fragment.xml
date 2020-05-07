@@ -105,6 +105,17 @@
                     android:textAllCaps="false"
                     android:textColor="@color/textBlack"
                     android:textSize="12sp" />
+                <Button
+                    android:id="@+id/asiaChipBtn"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/chip_shape"
+                    android:fontFamily="@font/tajawalbold"
+                    android:text="@string/asia"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textBlack"
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/europeChipBtn"
