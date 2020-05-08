@@ -1,14 +1,16 @@
 package com.example.covidtracker.countries
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.covidtracker.R
+import com.example.covidtracker.core.COUNTRY_DATA_EXTRA_KEY
 import com.example.covidtracker.core.models.CountryData
-import com.example.covidtracker.utils.Helper
+import com.example.covidtracker.countries_details.CountriesDetails
 import kotlinx.android.synthetic.main.country_item.view.*
 
 class CountriesAdapter (val items : ArrayList<CountryData>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
@@ -22,14 +24,33 @@ class CountriesAdapter (val items : ArrayList<CountryData>, val context: Context
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.countryName.text= items[position].country
+        val item = items[position]
+        holder.countryName.text= item.country
 //        holder.countryCases.text= Helper.convertNumber(items.get(position).cases)
 //        holder.countryRecoverd.text= Helper.convertNumber(items.get(position).recovered)
 //        holder.countryDeaths.text=Helper.convertNumber(items.get(position).deaths)
-        holder.countryCases.text= "${items.get(position).cases}"
-        holder.countryRecoverd.text= "${items.get(position).recovered}"
-        holder.countryDeaths.text= "${items.get(position).deaths}"
-        Glide.with(context).load(items[position].countryInfo.flag).into(holder.countryFlag)
+        holder.countryCases.text= "${item.cases}"
+        holder.countryRecoverd.text= "${item.recovered}"
+        holder.countryDeaths.text= "${item.deaths}"
+        Glide.with(context).load(item.countryInfo.flag).into(holder.countryFlag)
+        holder.countryItemId.setOnClickListener{
+            val intent = Intent(context,CountriesDetails::class.java)
+            intent.putExtra(COUNTRY_DATA_EXTRA_KEY,item)
+            context.startActivity(intent)
+        }
+    }
+
+    fun clear() {
+        items.clear()
+        notifyDataSetChanged()
+    }
+
+    // Add a list of items -- change to type used
+    fun addAll(countriesData:List<CountryData>) {
+        if(countriesData.count()>0){
+            items.addAll(countriesData)
+            notifyDataSetChanged()
+        }
 
     }
 }
@@ -40,4 +61,5 @@ class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val countryCases=view.confirmTextViewId
     val countryRecoverd=view.recoveredTextViewId
     val countryDeaths=view.deathTextViewId
+    val countryItemId = view.countryItemId
 }

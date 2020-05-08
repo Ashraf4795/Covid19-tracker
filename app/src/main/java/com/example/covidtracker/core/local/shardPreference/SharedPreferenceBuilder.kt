@@ -15,7 +15,7 @@ class SharedPreferenceBuilder(val context: Context, val PREFE_NAME:String){
 
 
     // save interval data
-    fun saveIntervalAndUpdateWorkerRequest(KEY_NAME: String, value: Long,timeUnit: TimeUnit) {
+   fun saveIntervalAndUpdateWorkerRequest(KEY_NAME: String, value: Long,timeUnit: TimeUnit) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
 
         editor.putLong(KEY_NAME, value)

@@ -1,5 +1,6 @@
 package com.example.covidtracker.countries
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,9 +20,11 @@ import com.example.covidtracker.core.models.CountryData
 import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
 import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
+import com.example.covidtracker.setting.Setting
 import com.example.covidtracker.utils.Helper
 import com.example.covidtracker.utils.Status
 import kotlinx.android.synthetic.main.countries_fragment.*
+import kotlinx.android.synthetic.main.fragment_global.*
 import kotlinx.android.synthetic.main.total_card.*
 
 
@@ -73,6 +76,11 @@ class CountryFragment : Fragment() {
             setCountriesRecyclerData(australiaList as ArrayList<CountryData>)
         }
 
+        settingBtnId2.setOnClickListener{
+            val intent = Intent(requireContext(),Setting::class.java)
+            startActivity(intent)
+        }
+
 
     }
 
@@ -89,7 +97,7 @@ class CountryFragment : Fragment() {
 
     //get World Cases and Recoverd and Dethes
     private fun getData() {
-        viewModel.getGlobalDataFromNetwork().observe(viewLifecycleOwner, Observer{
+        viewModel.getGlobalDataFromDatabase().observe(viewLifecycleOwner, Observer{
             it.let {
                 when(it.status){
                     Status.SUCCESS ->{
@@ -111,7 +119,7 @@ class CountryFragment : Fragment() {
 
     //get CountreisData
     private fun getCountriesData() {
-        viewModel.getCountriesDataFromNetwork().observe(viewLifecycleOwner, Observer{
+        viewModel.getCountriesDataFromDatabase().observe(viewLifecycleOwner, Observer{
             it.let {
                 when(it.status){
                     Status.SUCCESS ->{

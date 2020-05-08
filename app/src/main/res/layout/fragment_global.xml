@@ -29,6 +29,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:padding="16dp"
+                    android:clickable="true"
                     android:src="@drawable/ic_settings" />
                 <TextView
                     android:id="@+id/textView2"

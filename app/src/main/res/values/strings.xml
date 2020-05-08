@@ -33,4 +33,7 @@
     <string name="southAmarica">South Amarica</string>
     <string name="Australia">Australia</string>
     <string name="EnterSearchText">Enter Country to search</string>
+    <string name="recovery_percentage">Recovery Percentage</string>
+    <string name="testPerMillion">Tests Per Million</string>
+    <string name="country_notification_message">"Get notified for the latest updates for this country "</string>
 </resources>

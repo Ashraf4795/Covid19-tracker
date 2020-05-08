@@ -19,6 +19,7 @@ import com.example.covidtracker.core.local.LocalDataBase
 import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
 import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
+import com.example.covidtracker.global.GlobalFragment
 import com.example.covidtracker.global.GlobalViewModel
 import com.example.covidtracker.utils.Helper
 import com.example.covidtracker.utils.Status
@@ -36,6 +37,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private lateinit var navController: NavController
+
+    val globalFragment = GlobalFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -49,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 
     //Setting Up the back button
     override fun onSupportNavigateUp(): Boolean {

@@ -9,7 +9,6 @@
     app:cardCornerRadius="10dp"
     android:layout_margin="8dp" >
 
-
     <!--Root-->
     <LinearLayout
         android:background="@color/primeRed"

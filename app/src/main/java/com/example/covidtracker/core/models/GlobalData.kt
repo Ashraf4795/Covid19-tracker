@@ -3,6 +3,7 @@ package com.example.covidtracker.core.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
+import java.io.Serializable
 
 @Entity(tableName = "globalData")
 data class GlobalData(
@@ -20,4 +21,4 @@ data class GlobalData(
     val todayDeaths: Long,
     @PrimaryKey
     val updated: Long
-)
+):Serializable

@@ -26,7 +26,6 @@
     <color name="topCountryBG">#a8e6cf</color>
 
     <color name="confirmedColor">#418BCA</color>
-
     <color name="recoveryColor">#02B686</color>
 
     <color name="backgroundColor">#FFFFFF</color>
@@ -35,4 +34,7 @@
     <color name="white">#fff</color>
 
     <color name="countryItemColor">#F0F1F3</color>
+    <color name="population_background">#c0d9ee</color>
+    <color name="population_recovery">#609ed3</color>
+    <color name="casePopulation">#b3b3b3</color>
 </resources>
