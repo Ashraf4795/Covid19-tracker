@@ -25,7 +25,6 @@ class Helper {
             return number.toString()
         }
 
-<<<<<<< HEAD
         fun compareFetchedDataWithLocalData(
             countriesData: List<CountryData>,
             subscribedCountries: List<SubscripEntity>
