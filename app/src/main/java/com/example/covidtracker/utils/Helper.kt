@@ -1,5 +1,7 @@
 package com.example.covidtracker.utils
 
+import com.example.covidtracker.core.models.CountryData
+import com.example.covidtracker.core.models.SubscripEntity
 import java.lang.StringBuilder
 
 class Helper {
@@ -21,6 +23,26 @@ class Helper {
                 }
             }
             return number.toString()
+        }
+
+        fun MapCountryDataToSubscribeCountryData(countryData: CountryData):SubscripEntity
+        {
+           return SubscripEntity(countryData.active,
+               countryData.cases,
+               countryData.casesPerOneMillion,
+               countryData.continent,
+               countryData.country,
+               countryData.countryInfo,
+               countryData.critical,
+               countryData.deaths,
+               countryData.deathsPerOneMillion,
+               countryData.recovered,
+               countryData.tests,
+               countryData.testsPerOneMillion,
+               countryData.todayCases,
+               countryData.todayDeaths,
+               countryData.updated
+           )
         }
     }
 }

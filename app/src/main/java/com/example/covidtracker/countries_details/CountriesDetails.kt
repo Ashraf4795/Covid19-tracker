@@ -23,6 +23,7 @@ import com.example.covidtracker.countries.CountryViewModel
 import com.example.covidtracker.global.GlobalViewModel
 import com.example.covidtracker.setting.Setting
 import com.example.covidtracker.utils.Helper
+import com.example.covidtracker.utils.Resource
 import com.example.covidtracker.utils.Status
 import kotlinx.android.synthetic.main.active_serious_layout.*
 import kotlinx.android.synthetic.main.activity_countries_details.*
@@ -38,40 +39,86 @@ import kotlinx.android.synthetic.main.total_card.recoveredTextViewId
 
 class CountriesDetails : AppCompatActivity() {
 
-    lateinit var  countryData:CountryData
-    private lateinit var viewModel: GlobalViewModel
+    lateinit var countryData: CountryData
+    private lateinit var viewModel: CountryDetailslViewModel
+    var isSubscribed: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_countries_details)
         setUpCountryViewModel()
-
-        if(intent.extras !=null){
-            val bundle:Bundle = intent.extras!!
+        if (intent.extras != null) {
+            val bundle: Bundle = intent.extras!!
             countryData = bundle.get(COUNTRY_DATA_EXTRA_KEY) as CountryData
         }
-
+        isCountrySubscribed(countryData)
         setUpPopulationData(countryData)
         setUpUI(countryData)
-        todayBtnId.setOnClickListener{
+
+
+        todayBtnId.setOnClickListener {
             setUpTodayUI(countryData)
         }
 
-        totalBtnId.setOnClickListener{
+        totalBtnId.setOnClickListener {
             setUpUI(countryData)
         }
 
-        settingBtnId.setOnClickListener{
+        settingBtnId.setOnClickListener {
             val intent = Intent(this, Setting::class.java)
             startActivity(intent)
         }
 
         //notify
-        notifyBtnId.setOnClickListener{
+        notifyBtnId.setOnClickListener {
+            isSubscribed = !isSubscribed
+            setNotifyButtonStyle()
+            if(!isSubscribed)
+            {
+                viewModel.unSubscribe(countryData)
+            }else
+            {
+                viewModel.insertToSubscripTable(countryData)
+            }
         }
 
-        backBtnId.setOnClickListener{
+        backBtnId.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun isCountrySubscribed(countryData: CountryData) {
+        viewModel.isSubscribed(countryData).observe(this, Observer {
+            it.let {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        it?.data.let {
+                            if(it?.size!=0){
+                                isSubscribed=true
+                                setNotifyButtonStyle()
+                            }
+                        }
+                    }
+                    Status.ERROR -> {
+                        Toast.makeText(this, "Connection Issue", Toast.LENGTH_LONG)
+                    }
+                    Status.LOADING -> {
+                    }
+                }
+            }
+        })
+    }
+
+
+    private fun setNotifyButtonStyle() {
+        if (isSubscribed) {
+            notifyBtnId.setBackgroundResource(R.drawable.un_notify_button)
+            notifyBtnId.setText(R.string.unnotify)
+            notifyBtnId.setTextColor(resources.getColor(R.color.textBlack))
+        } else {
+            notifyBtnId.setBackgroundResource(R.drawable.notify_button)
+              notifyBtnId.setText(R.string.notifyMe)
+            notifyBtnId.setTextColor(resources.getColor(R.color.white))
         }
     }
 
@@ -84,11 +131,11 @@ class CountriesDetails : AppCompatActivity() {
                 RetrofitApiHelper(RetrofitBuilder.apiService),
                 LocalDataBase(DatabaseBuilder.getInstance(this))
             )
-        ).get(GlobalViewModel::class.java)
+        ).get(CountryDetailslViewModel::class.java)
     }
 
     private fun setUpPopulationData(countryData: CountryData) {
-        val result = ((countryData.recovered.toFloat()/countryData.cases.toFloat())*100).toInt()
+        val result = ((countryData.recovered.toFloat() / countryData.cases.toFloat()) * 100).toInt()
         percentageTVId.text = "$result%"
 
         Log.d("abc", "${countryData.recovered}")

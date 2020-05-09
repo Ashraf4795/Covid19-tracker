@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.covidtracker.core.local.LocalDataBaseContract
 import com.example.covidtracker.core.network.NetworkServiceContract
 import com.example.covidtracker.countries.CountryViewModel
+import com.example.covidtracker.countries_details.CountryDetailslViewModel
 import com.example.covidtracker.global.GlobalViewModel
 
 class ViewModelFactory(private val networkServiceContract: NetworkServiceContract,
@@ -22,7 +23,16 @@ class ViewModelFactory(private val networkServiceContract: NetworkServiceContrac
             ) as T
         }
         else if(modelClass.isAssignableFrom(CountryViewModel::class.java)){
-            return CountryViewModel(
+                return CountryViewModel(
+                    Repository(
+                        networkServiceContract,
+                        localDataBaseContract
+                    )
+                ) as T
+
+        }
+        else if(modelClass.isAssignableFrom(CountryDetailslViewModel::class.java)){
+            return CountryDetailslViewModel(
                 Repository(
                     networkServiceContract,
                     localDataBaseContract
