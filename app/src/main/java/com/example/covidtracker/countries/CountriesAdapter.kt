@@ -13,7 +13,7 @@ import com.example.covidtracker.core.models.CountryData
 import com.example.covidtracker.countries_details.CountriesDetails
 import kotlinx.android.synthetic.main.country_item.view.*
 
-class CountriesAdapter (val items : ArrayList<CountryData>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class CountriesAdapter (var items : ArrayList<CountryData>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
     override fun getItemCount(): Int {
         return items.size
@@ -53,6 +53,10 @@ class CountriesAdapter (val items : ArrayList<CountryData>, val context: Context
         }
 
     }
+    fun filterList(filterdNames: ArrayList<CountryData>) {
+        this.items = filterdNames
+        notifyDataSetChanged()
+    }
 }
 
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
@@ -63,3 +67,4 @@ class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val countryDeaths=view.deathTextViewId
     val countryItemId = view.countryItemId
 }
+

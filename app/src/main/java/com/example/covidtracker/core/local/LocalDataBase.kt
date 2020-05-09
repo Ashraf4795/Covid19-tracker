@@ -7,6 +7,7 @@ import com.example.covidtracker.core.models.SubscripEntity
 class LocalDataBase(private val appDataBase: AppDataBase):LocalDataBaseContract{
 
     override suspend fun insertGlobal(globalData: GlobalData) {
+        appDataBase.getDao().deleteGlobal()
         appDataBase.getDao().insertGlobal(globalData)
     }
 
@@ -20,7 +21,8 @@ class LocalDataBase(private val appDataBase: AppDataBase):LocalDataBaseContract{
     }
 
     override suspend fun insertCountry(countriesData: List<CountryData>) {
-          appDataBase.getDao().insertCountry(countriesData)
+        appDataBase.getDao().deleteCountries()
+        appDataBase.getDao().insertCountry(countriesData)
 
     }
 
