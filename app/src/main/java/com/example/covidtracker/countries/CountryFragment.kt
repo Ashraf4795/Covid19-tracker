@@ -2,16 +2,17 @@ package com.example.covidtracker.countries
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.covidtracker.R
 import com.example.covidtracker.core.ViewModelFactory
 import com.example.covidtracker.core.local.DatabaseBuilder
@@ -24,13 +25,15 @@ import com.example.covidtracker.setting.Setting
 import com.example.covidtracker.utils.Helper
 import com.example.covidtracker.utils.Status
 import kotlinx.android.synthetic.main.countries_fragment.*
-import kotlinx.android.synthetic.main.fragment_global.*
 import kotlinx.android.synthetic.main.total_card.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CountryFragment : Fragment() {
     private lateinit var viewModel: CountryViewModel
     private lateinit var countriesData: List<CountryData>
+    private lateinit var adapter:CountriesAdapter
 
 
 
@@ -81,8 +84,40 @@ class CountryFragment : Fragment() {
             startActivity(intent)
         }
 
+        searchTxt.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                filter(p0.toString());
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+
 
     }
+    //filter data
+      fun filter(text: String): Unit {
+        //new array list that will hold the filtered data
+        val filterdNames: ArrayList<CountryData> = ArrayList()
+        Log.d("fffff",""+countriesData.size)
+        //looping through existing elements
+        for (s in countriesData) {
+            //if the existing elements contains the search input
+            if (s.country.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))) {
+                //adding the element to filtered list
+                filterdNames.add(s)
+            }
+        }
+
+        //calling a method of the adapter class and passing the filtered list
+        Log.d("ddddd",""+filterdNames.size)
+        adapter.filterList(filterdNames)
+    }
+
 
     //set Up view Model
     private fun setUpCountryViewModel() {
@@ -150,7 +185,7 @@ class CountryFragment : Fragment() {
     //setUp country RecyclerView
     fun setCountriesRecyclerData(Countries:ArrayList<CountryData>){
         countriesRecyclerViewId.layoutManager=  LinearLayoutManager(requireContext())
-        countriesRecyclerViewId.adapter=
-            CountriesAdapter(Countries,requireContext())
+        adapter=CountriesAdapter(Countries,requireContext())
+        countriesRecyclerViewId.adapter= adapter
     }
 }
