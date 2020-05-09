@@ -16,4 +16,10 @@ interface LocalDataBaseContract{
 
     //test
     suspend fun getSubscriptedCountry():List<SubscripEntity>
+
+    //delete from subscribe table
+    suspend fun deleteSubscribeCountry(countryName: String)
+
+    //check if country is exist in subscribe table
+    suspend fun isSubscribed(countryName: String):List<SubscripEntity>
 }

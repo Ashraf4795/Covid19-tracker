@@ -85,4 +85,15 @@ class Repository(val networkContract : NetworkServiceContract,val localContract:
     }
 
 
+    //check if subscribed or not
+    suspend fun isSubscribed(countryName: String)=GlobalScope.async(Dispatchers.IO) {
+        localContract.isSubscribed(countryName)
+    }.await()
+
+    //delete subscribed country
+    suspend fun deleteSubscribedCountry(countryName: String) =GlobalScope.async(Dispatchers.IO) {
+        localContract.deleteSubscribeCountry(countryName)
+    }.await()
+
+
 }

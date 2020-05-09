@@ -32,7 +32,7 @@ import kotlin.collections.ArrayList
 
 class CountryFragment : Fragment() {
     private lateinit var viewModel: CountryViewModel
-    private lateinit var countriesData: List<CountryData>
+    private  var countriesData: List<CountryData> =ArrayList<CountryData>()
     private lateinit var adapter:CountriesAdapter
 
 
@@ -115,7 +115,7 @@ class CountryFragment : Fragment() {
 
         //calling a method of the adapter class and passing the filtered list
         Log.d("ddddd",""+filterdNames.size)
-        adapter.filterList(filterdNames)
+        adapter?.filterList(filterdNames)
     }
 
 

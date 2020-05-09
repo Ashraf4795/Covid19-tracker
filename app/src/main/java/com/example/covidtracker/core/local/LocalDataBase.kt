@@ -39,4 +39,13 @@ class LocalDataBase(private val appDataBase: AppDataBase):LocalDataBaseContract{
     }
 
     override suspend fun getSubscriptedCountry() = appDataBase.getDao().getSubscripedCountry()
+
+    //delete from subscribe
+    override suspend fun deleteSubscribeCountry(countryName: String) {
+        appDataBase.getDao().deleteSubscribeCountry(countryName)
+    }
+
+    //check is subscribed or not
+    override suspend fun isSubscribed(countryName: String)=appDataBase.getDao().isSubscribed(countryName)
+
 }

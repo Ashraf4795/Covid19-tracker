@@ -25,6 +25,7 @@ class Helper {
             return number.toString()
         }
 
+<<<<<<< HEAD
         fun compareFetchedDataWithLocalData(
             countriesData: List<CountryData>,
             subscribedCountries: List<SubscripEntity>
@@ -43,5 +44,24 @@ class Helper {
         }
 
 
+        fun MapCountryDataToSubscribeCountryData(countryData: CountryData):SubscripEntity
+        {
+           return SubscripEntity(countryData.active,
+               countryData.cases,
+               countryData.casesPerOneMillion,
+               countryData.continent,
+               countryData.country,
+               countryData.countryInfo,
+               countryData.critical,
+               countryData.deaths,
+               countryData.deathsPerOneMillion,
+               countryData.recovered,
+               countryData.tests,
+               countryData.testsPerOneMillion,
+               countryData.todayCases,
+               countryData.todayDeaths,
+               countryData.updated
+           )
+        }
     }
 }

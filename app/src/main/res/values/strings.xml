@@ -36,4 +36,5 @@
     <string name="recovery_percentage">Recovery Percentage</string>
     <string name="testPerMillion">Tests Per Million</string>
     <string name="country_notification_message">"Get notified for the latest updates for this country "</string>
+    <string name="unnotify">Don\'t Notify</string>
 </resources>
