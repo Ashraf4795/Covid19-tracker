@@ -41,7 +41,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         getData()
-        viewModel.startUpdateWorker(15,TimeUnit.HOURS,applicationContext)
+        viewModel.startUpdateWorker(15,TimeUnit.MINUTES,applicationContext)
     }
     private fun getData() {
         viewModel.getGlobalDataWithCountriesData().observe(this,Observer{

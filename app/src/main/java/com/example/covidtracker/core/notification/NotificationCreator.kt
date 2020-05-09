@@ -8,60 +8,79 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
+import androidx.annotation.NonNull
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.example.covidtracker.R
+import com.example.covidtracker.core.CHANNEL_ID
+import com.example.covidtracker.core.FLAG
+import com.example.covidtracker.core.REQUEST_CODE
+import com.example.covidtracker.core.models.CountryData
 import java.net.URI
 
 
-class NotificationCreator {
-    private val REQUEST_CODE = 123
-    private val FLAG = 0
+class NotificationCreator (val context: Context){
 
-    fun createNotification(context: Context,title:String,message:String,intent: Intent,channelId:String,autoCancel:Boolean = true ): Notification{
+
+    private fun createNotification(title:String,message:String,intent: Intent,autoCancel:Boolean = true ): Notification{
 
         val pendingIntent = PendingIntent.getActivity(context,REQUEST_CODE,intent,FLAG)
 
-        val notification = NotificationCompat.Builder(context, channelId).apply {
-            setSmallIcon(R.drawable.ic_launcher_background)
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID).apply {
+            setSmallIcon(R.drawable.ic_covid_icon)
             setContentTitle(title)
             setContentText(message)
-            setChannelId(channelId)
+            setChannelId(CHANNEL_ID)
             setContentIntent(pendingIntent)
             setAutoCancel(true)
             setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM))
             setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             priority = NotificationCompat.PRIORITY_DEFAULT // 7
-
-
         }.build()
         return notification
     }
 
 
-    fun createNotificationChannelId(context: Context, importance: Int, showBadge: Boolean, name: String, description: String): String {
-
+    private fun createNotificationChannelId(importance: Int, showBadge: Boolean, name: String, _description: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            val channelId = "${context.packageName}-$name"
-            val channel = NotificationChannel(channelId, name, importance)
-            channel.description = description
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = _description
+            }
             channel.setShowBadge(showBadge)
 
             val notificationManager = context.getSystemService(NotificationManager::class.java)
             notificationManager?.createNotificationChannel(channel)
-            return channelId
         }
-        return ""
     }
 
 
-    fun playNotificationRingtone(context:Context) {
+    private fun playNotificationRingtone() {
         try {
             val notificationUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
             val ringtone = RingtoneManager.getRingtone(context,notificationUri)
             ringtone.play()
         }catch (exception:Exception){
             exception.printStackTrace()
+        }
+    }
+
+    fun makeNotification(@NonNull countryName:String,_id:Int) {
+        val intent = Intent(context, CountryData::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val notification = createNotification(
+            "Update",
+            "${countryName} has update, check it out",
+            intent,
+            true
+        )
+
+        with(NotificationManagerCompat.from(context)){
+            _id?.let {
+                notify(it,notification)
+                playNotificationRingtone()
+            }
         }
     }
 

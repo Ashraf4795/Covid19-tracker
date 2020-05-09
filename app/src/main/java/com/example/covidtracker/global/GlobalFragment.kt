@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covidtracker.R
+import com.example.covidtracker.core.Refreshable
 import com.example.covidtracker.core.ViewModelFactory
 import com.example.covidtracker.core.local.DatabaseBuilder
 import com.example.covidtracker.core.local.LocalDataBase
@@ -29,7 +30,7 @@ import kotlinx.android.synthetic.main.fragment_global.*
 import kotlinx.android.synthetic.main.total_card.*
 
 
-class GlobalFragment : Fragment() {
+class GlobalFragment : Fragment() , Refreshable {
 
     private lateinit var viewModel: GlobalViewModel
     private lateinit var globalData: GlobalData
@@ -72,7 +73,7 @@ class GlobalFragment : Fragment() {
 
     }
 
-    fun refresh(){
+    override fun refresh(){
         viewModel.getGlobalDataWithCountriesData().observe(viewLifecycleOwner,Observer{
             it.let {
                 when(it.status){

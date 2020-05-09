@@ -1,32 +1,16 @@
 package com.example.covidtracker.main
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.covidtracker.R
-import com.example.covidtracker.core.ViewModelFactory
-import com.example.covidtracker.core.local.DatabaseBuilder
-import com.example.covidtracker.core.local.LocalDataBase
-import com.example.covidtracker.core.models.GlobalData
-import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
-import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
-import com.example.covidtracker.global.GlobalFragment
-import com.example.covidtracker.global.GlobalViewModel
-import com.example.covidtracker.utils.Helper
-import com.example.covidtracker.utils.Status
-import kotlinx.android.synthetic.main.active_serious_layout.*
+import com.example.covidtracker.core.Refreshable
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_global.*
-import kotlinx.android.synthetic.main.total_card.*
+
 
 class MainActivity : AppCompatActivity() {
     //todo: setup workmanager
@@ -38,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
-    val globalFragment = GlobalFragment()
+    lateinit var currentFragment: Refreshable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +34,6 @@ class MainActivity : AppCompatActivity() {
         //Setting the navigation controller to Bottom Nav
         navigationViewId.setupWithNavController(navController)
 
-
-
     }
 
 
@@ -59,9 +41,6 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, null)
     }
-
-
-
 
 
 }

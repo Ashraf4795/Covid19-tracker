@@ -1,6 +1,7 @@
 package com.example.covidtracker.core.workManager.worker
 
 import android.content.Context
+import android.content.Intent
 import androidx.work.*
 import com.example.covidtracker.core.Repository
 import com.example.covidtracker.core.UPDATE_WORKER_ID
@@ -8,9 +9,12 @@ import com.example.covidtracker.core.local.DatabaseBuilder
 import com.example.covidtracker.core.local.LocalDataBase
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
 import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
+import com.example.covidtracker.core.notification.NotificationCreator
+import com.example.covidtracker.countries.CountryFragment
+import com.example.covidtracker.utils.Helper
 import java.util.concurrent.TimeUnit
 
-class UpdateWorker (context: Context,workerParameters: WorkerParameters): CoroutineWorker(context,workerParameters) {
+class UpdateWorker (val context: Context,workerParameters: WorkerParameters): CoroutineWorker(context,workerParameters) {
 
 
     val repository = Repository(
@@ -37,7 +41,15 @@ class UpdateWorker (context: Context,workerParameters: WorkerParameters): Corout
 
     override suspend fun doWork(): Result {
         //fetch network data code
-        repository.refreshData()
+        val data = repository.refreshData()
+        //check subscribed countries
+        //if there is a change notifiy user with chnages
+        val subscribedCountries = repository.getSubscripedCountries()
+        val notifiedCountries = Helper.compareFetchedDataWithLocalData(data.second,subscribedCountries)
+        val notificationCreator = NotificationCreator(context)
+        subscribedCountries.forEach{
+            it.countryInfo._id?.let { it1 -> notificationCreator.makeNotification(it.country, it1) }
+        }
         return Result.success()
     }
 
