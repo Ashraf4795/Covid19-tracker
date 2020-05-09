@@ -1,7 +1,7 @@
 package com.example.covidtracker.core.workManager.worker
 
 import android.content.Context
-import android.content.Intent
+import android.util.Log
 import androidx.work.*
 import com.example.covidtracker.core.Repository
 import com.example.covidtracker.core.UPDATE_WORKER_ID
@@ -45,6 +45,7 @@ class UpdateWorker (val context: Context,workerParameters: WorkerParameters): Co
         //check subscribed countries
         //if there is a change notifiy user with chnages
         val subscribedCountries = repository.getSubscripedCountries()
+        Log.d("subscribe",subscribedCountries.toString())
         val notifiedCountries = Helper.compareFetchedDataWithLocalData(data.second,subscribedCountries)
         val notificationCreator = NotificationCreator(context)
         subscribedCountries.forEach{

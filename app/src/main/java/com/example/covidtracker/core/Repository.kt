@@ -63,7 +63,9 @@ class Repository(val networkContract : NetworkServiceContract,val localContract:
     }
 
     // get all subscriped countries
-    suspend fun getSubscripedCountries() = localContract.getSubscriptedCountry()
+    suspend fun getSubscripedCountries() = GlobalScope.async(Dispatchers.IO){
+        localContract.getSubscriptedCountry()
+    }.await()
 
     //refresh data function
     suspend fun refreshData ():Pair<GlobalData,List<CountryData>>{

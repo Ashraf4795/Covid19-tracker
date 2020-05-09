@@ -37,4 +37,8 @@
     <string name="testPerMillion">Tests Per Million</string>
     <string name="country_notification_message">"Get notified for the latest updates for this country "</string>
     <string name="unnotify">Don\'t Notify</string>
+    <string name="updateInterval">Update every:</string>
+    <string name="darkMode">Dark Mode</string>
+
+
 </resources>

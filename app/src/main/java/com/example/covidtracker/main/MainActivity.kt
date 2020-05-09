@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         //Setting the navigation controller to Bottom Nav
         navigationViewId.setupWithNavController(navController)
 
+        
     }
 
 
