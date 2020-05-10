@@ -32,9 +32,8 @@ import kotlin.collections.ArrayList
 
 class CountryFragment : Fragment() {
     private lateinit var viewModel: CountryViewModel
-    private  var countriesData: List<CountryData> =ArrayList<CountryData>()
-    private lateinit var adapter:CountriesAdapter
-
+    private var countriesData: List<CountryData> = ArrayList<CountryData>()
+    private lateinit var adapter: CountriesAdapter
 
 
     override fun onCreateView(
@@ -55,32 +54,35 @@ class CountryFragment : Fragment() {
             setCountriesRecyclerData(countriesData as ArrayList<CountryData>)
         }
         africaChipBtn.setOnClickListener {
-            val africiList=countriesData.filter{data ->data.continent=="Africa"}
+            val africiList = countriesData.filter { data -> data.continent == "Africa" }
             setCountriesRecyclerData(africiList as ArrayList<CountryData>)
         }
         asiaChipBtn.setOnClickListener {
-            val asiaList=countriesData.filter{data ->data.continent=="Asia"}
+            val asiaList = countriesData.filter { data -> data.continent == "Asia" }
             setCountriesRecyclerData(asiaList as ArrayList<CountryData>)
         }
         europeChipBtn.setOnClickListener {
-            val europeList=countriesData.filter{data ->data.continent=="Europe"}
+            val europeList = countriesData.filter { data -> data.continent == "Europe" }
             setCountriesRecyclerData(europeList as ArrayList<CountryData>)
         }
         northAmaricaChipBtn.setOnClickListener {
-            val northAmaricaList=countriesData.filter{data ->data.continent=="North America"}
+            val northAmaricaList =
+                countriesData.filter { data -> data.continent == "North America" }
             setCountriesRecyclerData(northAmaricaList as ArrayList<CountryData>)
         }
         southAmaricaChipBtn.setOnClickListener {
-            val southAmaricaList=countriesData.filter{data ->data.continent=="South America"}
+            val southAmaricaList =
+                countriesData.filter { data -> data.continent == "South America" }
             setCountriesRecyclerData(southAmaricaList as ArrayList<CountryData>)
         }
         australiaChipBtn.setOnClickListener {
-            val australiaList=countriesData.filter{data ->data.continent=="Australia/Oceania"}
+            val australiaList =
+                countriesData.filter { data -> data.continent == "Australia/Oceania" }
             setCountriesRecyclerData(australiaList as ArrayList<CountryData>)
         }
 
-        settingBtnId2.setOnClickListener{
-            val intent = Intent(requireContext(),Setting::class.java)
+        settingBtnId2.setOnClickListener {
+            val intent = Intent(requireContext(), Setting::class.java)
             startActivity(intent)
         }
 
@@ -97,13 +99,45 @@ class CountryFragment : Fragment() {
             }
         })
 
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.refreshData().observe(viewLifecycleOwner, Observer {
+                it.let {
+                    when (it.status) {
+                        Status.SUCCESS -> {
+                            it?.data.let {
+                                if (it != null) {
+                                    setUpGlobalCard(it.first)
+                                    setCountriesRecyclerData(it.second as ArrayList)
+                                }
+                            }
+                        }
+                        Status.ERROR -> {
+                            Toast.makeText(requireContext(), "Connection Issue", Toast.LENGTH_LONG)
+                        }
+                        Status.LOADING -> {
+
+                        }
+                    }
+                }
+            })
+            swipeRefreshLayout.isRefreshing = false
+        }
+
+        swipeRefreshLayout.setColorSchemeResources(
+            android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light
+        )
 
     }
+
+
     //filter data
-      fun filter(text: String): Unit {
+    fun filter(text: String): Unit {
         //new array list that will hold the filtered data
         val filterdNames: ArrayList<CountryData> = ArrayList()
-        Log.d("fffff",""+countriesData.size)
+        Log.d("fffff", "" + countriesData.size)
         //looping through existing elements
         for (s in countriesData) {
             //if the existing elements contains the search input
@@ -114,7 +148,7 @@ class CountryFragment : Fragment() {
         }
 
         //calling a method of the adapter class and passing the filtered list
-        Log.d("ddddd",""+filterdNames.size)
+        Log.d("ddddd", "" + filterdNames.size)
         adapter?.filterList(filterdNames)
     }
 
@@ -132,20 +166,20 @@ class CountryFragment : Fragment() {
 
     //get World Cases and Recoverd and Dethes
     private fun getData() {
-        viewModel.getGlobalDataFromDatabase().observe(viewLifecycleOwner, Observer{
+        viewModel.getGlobalDataFromDatabase().observe(viewLifecycleOwner, Observer {
             it.let {
-                when(it.status){
-                    Status.SUCCESS ->{
+                when (it.status) {
+                    Status.SUCCESS -> {
                         it?.data.let {
                             if (it != null) {
                                 setUpGlobalCard(it)
                             }
                         }
                     }
-                    Status.ERROR ->{
-                        Toast.makeText(requireContext(),"Connection Issue", Toast.LENGTH_LONG)
+                    Status.ERROR -> {
+                        Toast.makeText(requireContext(), "Connection Issue", Toast.LENGTH_LONG)
                     }
-                    Status.LOADING ->{
+                    Status.LOADING -> {
                     }
                 }
             }
@@ -154,26 +188,27 @@ class CountryFragment : Fragment() {
 
     //get CountreisData
     private fun getCountriesData() {
-        viewModel.getCountriesDataFromDatabase().observe(viewLifecycleOwner, Observer{
+        viewModel.getCountriesDataFromDatabase().observe(viewLifecycleOwner, Observer {
             it.let {
-                when(it.status){
-                    Status.SUCCESS ->{
+                when (it.status) {
+                    Status.SUCCESS -> {
                         it?.data.let {
                             if (it != null) {
-                                countriesData= it
+                                countriesData = it
                             }
-                         setCountriesRecyclerData(it as ArrayList<CountryData>)
+                            setCountriesRecyclerData(it as ArrayList<CountryData>)
                         }
                     }
-                    Status.ERROR ->{
-                        Toast.makeText(requireContext(),"Connection Issue", Toast.LENGTH_LONG)
+                    Status.ERROR -> {
+                        Toast.makeText(requireContext(), "Connection Issue", Toast.LENGTH_LONG)
                     }
-                    Status.LOADING ->{
+                    Status.LOADING -> {
                     }
                 }
             }
         })
     }
+
     //Data for World
     private fun setUpGlobalCard(globalData: GlobalData) {
         confirmTextViewId.text = Helper.convertNumber(globalData.cases)
@@ -183,9 +218,9 @@ class CountryFragment : Fragment() {
 
 
     //setUp country RecyclerView
-    fun setCountriesRecyclerData(Countries:ArrayList<CountryData>){
-        countriesRecyclerViewId.layoutManager=  LinearLayoutManager(requireContext())
-        adapter=CountriesAdapter(Countries,requireContext())
-        countriesRecyclerViewId.adapter= adapter
+    fun setCountriesRecyclerData(Countries: ArrayList<CountryData>) {
+        countriesRecyclerViewId.layoutManager = LinearLayoutManager(requireContext())
+        adapter = CountriesAdapter(Countries, requireContext())
+        countriesRecyclerViewId.adapter = adapter
     }
 }

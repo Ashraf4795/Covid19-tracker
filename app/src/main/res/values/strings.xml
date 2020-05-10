@@ -2,8 +2,8 @@
     <string name="app_name">CovidTracker</string>
 
     <!--App strings-->
-    <string name="covid19">Covid-19</string>
-    <string name="confirmed">Confirmed</string>
+    <string name="covid19" translatable="false">Covid-19</string>
+    <string name="confirmed">confirmed</string>
     <string name="recovery">Recovery</string>
     <string name="Deaths">Deaths</string>
     <string name="CasesNumber">Cases Numbers</string>
@@ -21,8 +21,8 @@
     <string name="totalCasesPerMillion">Total Cases Per Million</string>
     <string name="country">Country</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="dot">.</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="dot" translatable="false">.</string>
     <string name="all">All</string>
 
     <!--contenient names-->

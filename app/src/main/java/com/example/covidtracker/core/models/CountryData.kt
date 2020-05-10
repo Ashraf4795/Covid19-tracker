@@ -3,7 +3,6 @@ package com.example.covidtracker.core.models
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.Expose
 import java.io.Serializable
 
 @Entity(tableName = "country")

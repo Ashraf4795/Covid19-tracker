@@ -44,4 +44,14 @@ class CountryViewModel(val repository: Repository) : ViewModel() {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
+
+    //refresh data
+    fun refreshData() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = repository.refreshData()))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
 }

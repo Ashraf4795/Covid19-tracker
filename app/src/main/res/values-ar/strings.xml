@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CovidTracker</string>
+    <string name="confirmed" translatable="false">مؤكد</string>
+    <string name="recovery" translatable="false">متعافي</string>
+    <string name="Deaths">وفيات</string>
+    <string name="CasesNumber">عدد الحالات</string>
+    <string name="total">كل</string>
+    <string name="today">اليوم</string>
+    <string name="active">حالي</string>
+    <string name="serious">خطير</string>
+    <string name="statistics">إحصائيات</string>
+    <string name="worldWide">عالمي</string>
+    <string name="countries">البلاد</string>
+    <string name="topCountries">إعلي الدول</string>
+    <string name="notifyMe">متابعة</string>
+    <string name="CasesPopulation">نسبة الحالات</string>
+    <string name="casesPerMillion">حالة في المليون</string>
+    <string name="totalCasesPerMillion">إجمالي في المليون</string>
+    <string name="country">بلد</string>
+    <string name="all">كل</string>
+    <string name="africa">إفريقيا</string>
+    <string name="Europe">أوروبا</string>
+    <string name="asia">آسيا</string>
+    <string name="northAmarica">أمريكا الشمالية</string>
+    <string name="southAmarica">أمريكا الجانوبية</string>
+    <string name="Australia">أستراليا</string>
+    <string name="EnterSearchText">بحث</string>
+    <string name="recovery_percentage">نسبة التعافي</string>
+    <string name="testPerMillion">تحليل في المليون</string>
+    <string name="country_notification_message">احصل على اشعارات بآخر التحديثات لهذا البلد</string>
+    <string name="unnotify">إلغاء المتابعة</string>
+    <string name="updateInterval">تحديث</string>
+</resources>

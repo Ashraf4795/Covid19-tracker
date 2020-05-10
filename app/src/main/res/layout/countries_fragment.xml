@@ -1,231 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:id="@+id/swipeRefreshLayout">
 
-    <LinearLayout
+    <ScrollView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/countries_background" />
-
-            <ImageView
-                android:id="@+id/settingBtnId2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:padding="16dp"
-                android:src="@drawable/ic_settings" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:fontFamily="@font/tajawalbold"
-                    android:text="@string/covid19"
-                    android:textColor="@color/textBlack"
-                    android:textSize="27sp" />
-
-                <include layout="@layout/total_card" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/round_edit_text"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/searchTxt"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight=".98"
-                        android:background="#00000000"
-                        android:maxLines="1"
-                        android:padding="6dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:src="@drawable/search_icon" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </FrameLayout>
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/allChipBtn"
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/chip_shape"
-                    android:fontFamily="@font/tajawalbold"
-                    android:text="@string/all"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textBlack"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/africaChipBtn"
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/chip_shape"
-                    android:fontFamily="@font/tajawalbold"
-                    android:text="@string/africa"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textBlack"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/asiaChipBtn"
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/chip_shape"
-                    android:fontFamily="@font/tajawalbold"
-                    android:text="@string/asia"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textBlack"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/europeChipBtn"
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/chip_shape"
-                    android:fontFamily="@font/tajawalbold"
-                    android:text="@string/Europe"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textBlack"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/northAmaricaChipBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/chip_shape"
-                    android:fontFamily="@font/tajawalbold"
-                    android:text="@string/northAmarica"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textBlack"
-                    android:textSize="10sp" />
-
-                <Button
-                    android:id="@+id/southAmaricaChipBtn"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/chip_shape"
-                    android:fontFamily="@font/tajawalbold"
-                    android:text="@string/southAmarica"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textBlack"
-                    android:textSize="10sp" />
-
-                <Button
-                    android:id="@+id/australiaChipBtn"
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/chip_shape"
-                    android:fontFamily="@font/tajawalbold"
-                    android:text="@string/Australia"
-                    android:textAllCaps="false"
-                    android:textColor="@color/textBlack"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </HorizontalScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="10dp"
-            android:weightSum="1">
+            android:orientation="vertical">
 
-            <TextView
-                style="@style/statisticsCardHeaderStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight=".60"
-                android:text="@string/country"
-                android:textColor="@color/textBlack" />
 
-            <TextView
-                style="@style/statisticsCardHeaderStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight=".13"
-                android:text="@string/confirmed"
-                android:textColor="@color/textBlack" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/statisticsCardHeaderStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight=".13"
-                android:text="@string/recovery"
-                android:textColor="@color/textBlack" />
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/countries_background" />
 
-            <TextView
-                style="@style/statisticsCardHeaderStyle"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/settingBtnId2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_settings" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/tajawalbold"
+                        android:text="@string/covid19"
+                        android:textColor="@color/textBlack"
+                        android:textSize="27sp" />
+
+                    <include layout="@layout/total_card" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/round_edit_text"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/searchTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight=".98"
+                            android:background="#00000000"
+                            android:maxLines="1"
+                            android:padding="6dp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/search_icon" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".13"
-                android:text="@string/Deaths"
-                android:textColor="@color/textBlack" />
+                android:layout_marginTop="13dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/allChipBtn"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/chip_shape"
+                        android:fontFamily="@font/tajawalbold"
+                        android:text="@string/all"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textBlack"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/africaChipBtn"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/chip_shape"
+                        android:fontFamily="@font/tajawalbold"
+                        android:text="@string/africa"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textBlack"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/asiaChipBtn"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/chip_shape"
+                        android:fontFamily="@font/tajawalbold"
+                        android:text="@string/asia"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textBlack"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/europeChipBtn"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/chip_shape"
+                        android:fontFamily="@font/tajawalbold"
+                        android:text="@string/Europe"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textBlack"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/northAmaricaChipBtn"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/chip_shape"
+                        android:fontFamily="@font/tajawalbold"
+                        android:text="@string/northAmarica"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textBlack"
+                        android:textSize="10sp" />
+
+                    <Button
+                        android:id="@+id/southAmaricaChipBtn"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/chip_shape"
+                        android:fontFamily="@font/tajawalbold"
+                        android:text="@string/southAmarica"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textBlack"
+                        android:textSize="10sp" />
+
+                    <Button
+                        android:id="@+id/australiaChipBtn"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:background="@drawable/chip_shape"
+                        android:fontFamily="@font/tajawalbold"
+                        android:text="@string/Australia"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textBlack"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:weightSum="1">
+
+                <TextView
+                    style="@style/statisticsCardHeaderStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".60"
+                    android:text="@string/country"
+                    android:textColor="@color/textBlack" />
+
+                <TextView
+                    style="@style/statisticsCardHeaderStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".13"
+                    android:text="@string/confirmed"
+                    android:textColor="@color/textBlack" />
+
+                <TextView
+                    style="@style/statisticsCardHeaderStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".13"
+                    android:text="@string/recovery"
+                    android:textColor="@color/textBlack" />
+
+                <TextView
+                    style="@style/statisticsCardHeaderStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".13"
+                    android:text="@string/Deaths"
+                    android:textColor="@color/textBlack" />
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/countriesRecyclerViewId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:clickable="true" />
+
+
         </LinearLayout>
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/countriesRecyclerViewId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:clickable="true" />
-
-
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
