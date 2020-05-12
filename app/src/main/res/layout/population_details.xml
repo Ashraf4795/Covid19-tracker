@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_marginTop="8dp"
     android:weightSum="1"
@@ -25,26 +26,23 @@
                android:textColor="@color/casePopulation"
                android:fontFamily="@font/tajawalbold"
                android:textAllCaps="false"/>
-           <FrameLayout
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center"
-               android:layout_marginTop="8dp">
-               <ImageView
-                   android:layout_width="44dp"
-                   android:layout_height="44dp"
-                   android:src="@drawable/ic_population"/>
-               <TextView
-                   android:id="@+id/percentageTVId"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
+               <com.ramijemli.percentagechartview.PercentageChartView
+                   android:id="@+id/percentage_chart_id"
+                   android:layout_width="70dp"
+                   android:layout_height="70dp"
                    android:layout_gravity="center"
-                   android:textStyle="bold"
-                   android:textSize="14sp"
-                   android:text="12"
-                   android:textColor="@color/population_recovery"/>
+                   app:pcv_textColor="@color/textBlack"
+                   app:pcv_textSize="12sp"
+                   app:pcv_mode="ring"
+                   app:pcv_orientation="clockwise"
+                   app:pcv_animDuration="3000"
+                   app:pcv_animInterpolator="anticipate_overshoot"
+                   app:pcv_progress="0"
+                   app:pcv_progressColor="@color/primeRed"
 
-           </FrameLayout>
+                   app:pcv_backgroundBarColor="@color/countryItemColor"
+                   app:pcv_startAngle="90"/>
+
        </LinearLayout>
     </LinearLayout>
     <LinearLayout

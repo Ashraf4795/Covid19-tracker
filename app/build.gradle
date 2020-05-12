@@ -97,5 +97,12 @@ dependencies {
     //swip to refresh
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
+    //MPAndroid chart lib
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+
+
+    //progress chart
+    implementation 'com.ramijemli.percentagechartview:percentagechartview:0.3.0'
+
 
 }

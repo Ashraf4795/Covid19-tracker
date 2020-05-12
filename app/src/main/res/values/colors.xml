@@ -37,4 +37,6 @@
     <color name="population_background">#c0d9ee</color>
     <color name="population_recovery">#609ed3</color>
     <color name="casePopulation">#b3b3b3</color>
+    <color name="dangerous">#FF0000</color>
+
 </resources>

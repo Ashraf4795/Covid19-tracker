@@ -50,6 +50,12 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="12dp">
     <!--statistics layout here-->
+
+        <com.anychart.AnyChartView
+            android:id="@+id/any_chart_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     <!--statistics layout here-->
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

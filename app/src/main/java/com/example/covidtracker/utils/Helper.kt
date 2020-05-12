@@ -72,6 +72,10 @@ class Helper {
             val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
             return activeNetwork?.isConnectedOrConnecting == true
         }
+
+        fun decreaseDigits(num:Long):Long{
+            return num/1000000
+        }
     }
 
 

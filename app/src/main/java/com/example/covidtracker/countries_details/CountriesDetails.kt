@@ -1,14 +1,23 @@
 package com.example.covidtracker.countries_details
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.ColorUtils
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.anychart.AnyChart
+import com.anychart.chart.common.dataentry.DataEntry
+import com.anychart.chart.common.dataentry.ValueDataEntry
+import com.anychart.data.Mapping
+import com.anychart.data.Set
+import com.anychart.enums.Anchor
+import com.anychart.enums.MarkerType
+import com.anychart.enums.TooltipPositionMode
+import com.anychart.graphics.vector.Stroke
 import com.bumptech.glide.Glide
 import com.example.covidtracker.R
 import com.example.covidtracker.core.COUNTRY_DATA_EXTRA_KEY
@@ -16,26 +25,23 @@ import com.example.covidtracker.core.ViewModelFactory
 import com.example.covidtracker.core.local.DatabaseBuilder
 import com.example.covidtracker.core.local.LocalDataBase
 import com.example.covidtracker.core.models.CountryData
-import com.example.covidtracker.core.models.GlobalData
+import com.example.covidtracker.core.models.CountryHistorcalData
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
 import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
-import com.example.covidtracker.countries.CountryViewModel
-import com.example.covidtracker.global.GlobalViewModel
 import com.example.covidtracker.setting.Setting
 import com.example.covidtracker.utils.Helper
-import com.example.covidtracker.utils.Resource
 import com.example.covidtracker.utils.Status
+import com.ramijemli.percentagechartview.callback.AdaptiveColorProvider
+import com.ramijemli.percentagechartview.callback.ProgressTextFormatter
 import kotlinx.android.synthetic.main.active_serious_layout.*
 import kotlinx.android.synthetic.main.activity_countries_details.*
-import kotlinx.android.synthetic.main.country_item.*
-import kotlinx.android.synthetic.main.fragment_global.*
 import kotlinx.android.synthetic.main.fragment_global.settingBtnId
 import kotlinx.android.synthetic.main.fragment_global.todayBtnId
 import kotlinx.android.synthetic.main.fragment_global.totalBtnId
 import kotlinx.android.synthetic.main.population_details.*
+import kotlinx.android.synthetic.main.statistics_card.*
 import kotlinx.android.synthetic.main.total_card.*
-import kotlinx.android.synthetic.main.total_card.confirmTextViewId
-import kotlinx.android.synthetic.main.total_card.recoveredTextViewId
+
 
 class CountriesDetails : AppCompatActivity() {
 
@@ -54,11 +60,13 @@ class CountriesDetails : AppCompatActivity() {
         isCountrySubscribed(countryData)
         setUpPopulationData(countryData)
         setUpUI(countryData)
-
+        getCountryHistoricalDataFromNetwork(countryData.country)
 
         todayBtnId.setOnClickListener {
             setUpTodayUI(countryData)
         }
+
+
 
         totalBtnId.setOnClickListener {
             setUpUI(countryData)
@@ -135,16 +143,15 @@ class CountriesDetails : AppCompatActivity() {
     }
 
     private fun setUpPopulationData(countryData: CountryData) {
-        val result = ((countryData.recovered.toFloat() / countryData.cases.toFloat()) * 100).toInt()
-        percentageTVId.text = "$result%"
-
-        Log.d("abc", "${countryData.recovered}")
-
-        Log.d("abc", "${countryData.cases}")
-
+        val result = ((countryData.recovered.toFloat() / countryData.cases.toFloat()) * 100)
+        //percentageTVId.text = "$result%"
+        percentage_chart_id.setProgress(result,true)
+        percentage_chart_id.setTextFormatter(ProgressTextFormatter { progress ->  progress.toInt().toString()+"%"})
+        
         casesPerMillionTVId.text = countryData.casesPerOneMillion.toString()
         testPerMillionTVId.text = countryData.testsPerOneMillion.toString()
     }
+
 
 
     private fun setUpUI(countryData: CountryData) {
@@ -164,5 +171,118 @@ class CountriesDetails : AppCompatActivity() {
         deathsTextViewId.text = Helper.convertNumber(countryData.todayDeaths)
     }
 
+    private fun getCountryHistoricalDataFromNetwork(countryName:String){
+        viewModel.getCountryHistoricalData(countryName).observe(this, Observer {
+            it.let {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        it?.data.let {
+                            setCountryStatistics(it!!)
+                        }
+                    }
+                    Status.ERROR -> {
+                        Toast.makeText(this, "Connection Issue", Toast.LENGTH_LONG)
+                    }
+                    Status.LOADING -> {
+                    }
+                }
+            }
+        })
+    }
 
+
+    private fun setCountryStatistics(countryHistorcalData: CountryHistorcalData) {
+        val cartesian = AnyChart.line()
+        cartesian.yAxis(false)
+        cartesian.xAxis(true).labels(false)
+        cartesian.xScroller(true)
+
+        cartesian.animation(true)
+
+        cartesian.crosshair()
+            .yLabel(false) // TODO ystroke
+            .yStroke(null as Stroke?, null, null, null as String?, null as String?)
+
+        cartesian.tooltip().positionMode(TooltipPositionMode.POINT)
+
+
+
+        val seriesData: MutableList<DataEntry> = ArrayList()
+        countryHistorcalData.timeline.casesMap.forEach{
+            seriesData.add(ValueDataEntry(it.key,it.value))
+        }
+
+        val seriesData2: MutableList<DataEntry> = ArrayList()
+        countryHistorcalData.timeline.recoveredMap.forEach{
+            seriesData2.add(ValueDataEntry(it.key,it.value))
+        }
+
+        val seriesData3: MutableList<DataEntry> = ArrayList()
+        countryHistorcalData.timeline.deathsMap.forEach{
+            seriesData3.add(ValueDataEntry(it.key,it.value))
+        }
+
+        val set= Set.instantiate()
+        set.data(seriesData)
+        val series1Mapping: Mapping = set.mapAs("{ value2: 'value2', x: 'x' }")
+
+        val set2 = Set.instantiate()
+        set2.data(seriesData2)
+        val series2Mapping: Mapping = set2.mapAs("{ value2: 'value2', x: 'x' }")
+
+        val set3 = Set.instantiate()
+        set3.data(seriesData3)
+        val series3Mapping: Mapping = set3.mapAs("{ value2: 'value2', x: 'x' }")
+
+        val series1 = cartesian.line(series1Mapping)
+        series1.hovered().markers().enabled(true)
+        series1.name("confirmed")
+        series1.stroke("#418BCA")
+        series1.hovered().markers()
+            .type(MarkerType.CROSS)
+            .size(4.0)
+        series1.tooltip()
+            .position("right")
+            .anchor(Anchor.LEFT_CENTER)
+            .offsetX(5.0)
+            .offsetY(5.0)
+
+
+        val series2 = cartesian.line(series2Mapping)
+        series2.name("Recovered")
+        series2.hovered().markers().enabled(true)
+        series2.stroke("#02B686")
+        series2.hovered().markers()
+            .type(MarkerType.CIRCLE)
+            .size(4.0)
+        series2.tooltip()
+            .position("right")
+            .anchor(Anchor.LEFT_CENTER)
+            .offsetX(5.0)
+            .offsetY(5.0)
+
+        val series3 = cartesian.line(series3Mapping)
+        series3.stroke("#FF4947")
+        series3.name("Death")
+        series3.hovered().markers().enabled(true)
+        series3.hovered().markers()
+            .type(MarkerType.CIRCLE)
+            .size(4.0)
+            .stroke("blue")
+        series3.tooltip()
+            .position("right")
+            .anchor(Anchor.LEFT_CENTER)
+            .offsetX(5.0)
+            .offsetY(5.0)
+
+        any_chart_view.setChart(cartesian)
+    }
+
+
+    private enum class COLORS(val res:Int) {
+        LOW(R.color.recoveryColor),
+        MEDIUM(R.color.confirmedColor),
+        HIGH(R.color.primeRed),
+        DANGER(R.color.dangerous)
+    }
 }
