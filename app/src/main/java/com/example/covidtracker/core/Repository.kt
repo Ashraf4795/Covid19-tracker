@@ -7,6 +7,7 @@ import com.example.covidtracker.core.network.NetworkServiceContract
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 
 
 class Repository(val networkContract : NetworkServiceContract,val localContract:LocalDataBaseContract){
@@ -96,6 +97,16 @@ class Repository(val networkContract : NetworkServiceContract,val localContract:
     suspend fun deleteSubscribedCountry(countryName: String) =GlobalScope.async(Dispatchers.IO) {
         localContract.deleteSubscribeCountry(countryName)
     }.await()
+
+    suspend fun replaceOldSubscribedCountriesWithUpdatedCountries(notifiedCountries: List<SubscripEntity>) {
+        withContext(Dispatchers.IO){
+            notifiedCountries.forEach{
+                localContract.deleteSubscribeCountry(it.country)
+                localContract.insertToSubscripTable(it)
+            }
+        }
+
+    }
 
 
 }

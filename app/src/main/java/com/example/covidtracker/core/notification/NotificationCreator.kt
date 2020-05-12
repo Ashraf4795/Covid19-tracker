@@ -16,13 +16,14 @@ import com.example.covidtracker.core.CHANNEL_ID
 import com.example.covidtracker.core.FLAG
 import com.example.covidtracker.core.REQUEST_CODE
 import com.example.covidtracker.core.models.CountryData
+import com.example.covidtracker.countries.CountryFragment
 import java.net.URI
 
 
 class NotificationCreator (val context: Context){
 
 
-    private fun createNotification(title:String,message:String,intent: Intent,autoCancel:Boolean = true ): Notification{
+    private fun createNotification(title:String,message:String,intent: Intent): Notification{
 
         val pendingIntent = PendingIntent.getActivity(context,REQUEST_CODE,intent,FLAG)
 
@@ -32,7 +33,6 @@ class NotificationCreator (val context: Context){
             setContentText(message)
             setChannelId(CHANNEL_ID)
             setContentIntent(pendingIntent)
-            setAutoCancel(true)
             setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM))
             setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             priority = NotificationCompat.PRIORITY_DEFAULT // 7
@@ -66,15 +66,16 @@ class NotificationCreator (val context: Context){
     }
 
     fun makeNotification(@NonNull countryName:String,_id:Int) {
-        val intent = Intent(context, CountryData::class.java).apply {
+        val intent = Intent(context, CountryFragment::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
+        createNotificationChannelId(NotificationManager.IMPORTANCE_DEFAULT,true,"Covid-19","Update about Covid-19")
         val notification = createNotification(
             "Update",
             "${countryName} has update, check it out",
-            intent,
-            true
+            intent
         )
+
 
         with(NotificationManagerCompat.from(context)){
             _id?.let {

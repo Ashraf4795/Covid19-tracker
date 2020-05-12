@@ -26,6 +26,7 @@ import com.example.covidtracker.utils.Helper
 import com.example.covidtracker.utils.Status
 import kotlinx.android.synthetic.main.active_serious_layout.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.countries_fragment.*
 import kotlinx.android.synthetic.main.fragment_global.*
 import kotlinx.android.synthetic.main.total_card.*
 
@@ -70,6 +71,16 @@ class GlobalFragment : Fragment() , Refreshable {
             startActivity(intent)
         }
 
+        swipeRefreshLayoutGlobal.setOnRefreshListener {
+            refresh()
+        }
+
+        swipeRefreshLayoutGlobal.setColorSchemeResources(
+            R.color.primeRed,
+            R.color.confirmedColor,
+            R.color.recoveryColor
+        )
+
 
     }
 
@@ -82,15 +93,16 @@ class GlobalFragment : Fragment() , Refreshable {
                             if (it != null) {
                                 setUpUI(it.first)
                                 globalData = it.first
-                                progressBarId.visibility = View.GONE
+                                swipeRefreshLayoutGlobal.isRefreshing = false
                             }
                         }
                     }
                     Status.ERROR ->{
+                        swipeRefreshLayoutGlobal.isRefreshing = false
                         Toast.makeText(requireContext(),"Connection Issue", Toast.LENGTH_LONG)
                     }
                     Status.LOADING ->{
-                        progressBarId.visibility = View.VISIBLE
+                        swipeRefreshLayoutGlobal.isRefreshing = true
                     }
                 }
             }

@@ -2,7 +2,7 @@
     <string name="app_name">CovidTracker</string>
 
     <!--App strings-->
-    <string name="covid19" translatable="false">Covid-19</string>
+    <string name="covid19">Covid-19</string>
     <string name="confirmed">confirmed</string>
     <string name="recovery">Recovery</string>
     <string name="Deaths">Deaths</string>

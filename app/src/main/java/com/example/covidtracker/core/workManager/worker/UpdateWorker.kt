@@ -48,9 +48,10 @@ class UpdateWorker (val context: Context,workerParameters: WorkerParameters): Co
         Log.d("subscribe",subscribedCountries.toString())
         val notifiedCountries = Helper.compareFetchedDataWithLocalData(data.second,subscribedCountries)
         val notificationCreator = NotificationCreator(context)
-        subscribedCountries.forEach{
+        notifiedCountries.forEach{
             it.countryInfo._id?.let { it1 -> notificationCreator.makeNotification(it.country, it1) }
         }
+        repository.replaceOldSubscribedCountriesWithUpdatedCountries(notifiedCountries)
         return Result.success()
     }
 

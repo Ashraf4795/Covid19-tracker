@@ -35,7 +35,6 @@ class CountryFragment : Fragment() {
     private var countriesData: List<CountryData> = ArrayList<CountryData>()
     private lateinit var adapter: CountriesAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,6 +48,10 @@ class CountryFragment : Fragment() {
         setUpCountryViewModel()
         getData()
         getCountriesData()
+
+        with(countriesRecyclerViewId){
+            layoutManager = LinearLayoutManager(requireContext())
+        }
 
         allChipBtn.setOnClickListener {
             setCountriesRecyclerData(countriesData as ArrayList<CountryData>)
@@ -107,27 +110,27 @@ class CountryFragment : Fragment() {
                             it?.data.let {
                                 if (it != null) {
                                     setUpGlobalCard(it.first)
-                                    setCountriesRecyclerData(it.second as ArrayList)
+                                    setCountriesRecyclerData(it.second.sortedBy { it.cases } as ArrayList)
+                                    swipeRefreshLayout.isRefreshing = false
                                 }
                             }
                         }
                         Status.ERROR -> {
+                            swipeRefreshLayout.isRefreshing = false
                             Toast.makeText(requireContext(), "Connection Issue", Toast.LENGTH_LONG)
                         }
                         Status.LOADING -> {
-
+                            swipeRefreshLayout.isRefreshing = true
                         }
                     }
                 }
             })
-            swipeRefreshLayout.isRefreshing = false
         }
 
         swipeRefreshLayout.setColorSchemeResources(
-            android.R.color.holo_blue_bright,
-            android.R.color.holo_green_light,
-            android.R.color.holo_orange_light,
-            android.R.color.holo_red_light
+            R.color.primeRed,
+            R.color.confirmedColor,
+            R.color.recoveryColor
         )
 
     }
@@ -219,7 +222,6 @@ class CountryFragment : Fragment() {
 
     //setUp country RecyclerView
     fun setCountriesRecyclerData(Countries: ArrayList<CountryData>) {
-        countriesRecyclerViewId.layoutManager = LinearLayoutManager(requireContext())
         adapter = CountriesAdapter(Countries, requireContext())
         countriesRecyclerViewId.adapter = adapter
     }

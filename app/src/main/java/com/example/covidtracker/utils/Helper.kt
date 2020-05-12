@@ -1,5 +1,9 @@
 package com.example.covidtracker.utils
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkInfo
 import com.example.covidtracker.core.models.CountryData
 import com.example.covidtracker.core.models.SubscripEntity
 import java.lang.StringBuilder
@@ -28,14 +32,14 @@ class Helper {
         fun compareFetchedDataWithLocalData(
             countriesData: List<CountryData>,
             subscribedCountries: List<SubscripEntity>
-        ):List<SubscripEntity> {
+        ): List<SubscripEntity> {
             val notifiedCountries = ArrayList<SubscripEntity>()
-            countriesData.forEach { countryData ->
-                subscribedCountries.forEach { subscribe ->
+            subscribedCountries.forEach { subscribe ->
+                countriesData.forEach {countryData ->
                     if (countryData.countryInfo._id == subscribe.countryInfo._id) {
-                       if(countryData.updated != subscribe.updated) {
-                           notifiedCountries.add(subscribe)
-                       }
+                        if (countryData.updated != subscribe.updated) {
+                            notifiedCountries.add(Helper.MapCountryDataToSubscribeCountryData(countryData))
+                        }
                     }
                 }
             }
@@ -43,24 +47,32 @@ class Helper {
         }
 
 
-        fun MapCountryDataToSubscribeCountryData(countryData: CountryData):SubscripEntity
-        {
-           return SubscripEntity(countryData.active,
-               countryData.cases,
-               countryData.casesPerOneMillion,
-               countryData.continent,
-               countryData.country,
-               countryData.countryInfo,
-               countryData.critical,
-               countryData.deaths,
-               countryData.deathsPerOneMillion,
-               countryData.recovered,
-               countryData.tests,
-               countryData.testsPerOneMillion,
-               countryData.todayCases,
-               countryData.todayDeaths,
-               countryData.updated
-           )
+        fun MapCountryDataToSubscribeCountryData(countryData: CountryData): SubscripEntity {
+            return SubscripEntity(
+                countryData.active,
+                countryData.cases,
+                countryData.casesPerOneMillion,
+                countryData.continent,
+                countryData.country,
+                countryData.countryInfo,
+                countryData.critical,
+                countryData.deaths,
+                countryData.deathsPerOneMillion,
+                countryData.recovered,
+                countryData.tests,
+                countryData.testsPerOneMillion,
+                countryData.todayCases,
+                countryData.todayDeaths,
+                countryData.updated
+            )
+        }
+
+        fun isConnected(context: Context): Boolean {
+            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+            return activeNetwork?.isConnectedOrConnecting == true
         }
     }
+
+
 }
