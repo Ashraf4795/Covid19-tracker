@@ -39,6 +39,7 @@
     <string name="unnotify">Don\'t Notify</string>
     <string name="updateInterval">Update every:</string>
     <string name="darkMode">Dark Mode</string>
+    <string name="setting">Setting</string>
 
 
 </resources>
