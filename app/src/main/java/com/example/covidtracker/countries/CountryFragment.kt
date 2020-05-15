@@ -104,14 +104,14 @@ class CountryFragment : Fragment() {
 
         swipeRefreshLayout.setOnRefreshListener {
             viewModel.refreshData().observe(viewLifecycleOwner, Observer {
-                it.let {
+                it?.let {
                     when (it.status) {
                         Status.SUCCESS -> {
                             it?.data.let {
                                 if (it != null) {
+                                    swipeRefreshLayout.isRefreshing = false
                                     setUpGlobalCard(it.first)
                                     setCountriesRecyclerData(it.second.sortedBy { it.cases } as ArrayList)
-                                    swipeRefreshLayout.isRefreshing = false
                                 }
                             }
                         }

@@ -10,24 +10,13 @@
         android:name="com.example.covidtracker.global.GlobalFragment"
         android:label="fragment_global"
         tools:layout="@layout/fragment_global" >
-        <action
-            android:id="@+id/action_globalFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/countryFragment"
         android:name="com.example.covidtracker.countries.CountryFragment"
         android:label="CountryFragment"
         tools:layout="@layout/countries_fragment">
-        <action
-            android:id="@+id/action_countryFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/settingFragment"
-        android:name="com.example.covidtracker.setting.SettingFragment"
-        android:label="SettingFragment"
-        tools:layout="@layout/setting_fragment"/>
 
 
 </navigation>
