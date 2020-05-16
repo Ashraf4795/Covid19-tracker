@@ -13,5 +13,5 @@ const val COUNTRY_DATA_EXTRA_KEY=  "COUNTRY_DATA_EXTRA_KEY"
 const val GLOBAL_DATA_EXTRA_KEY=  "COUNTRY_DATA_EXTRA_KEY"
 const val REQUEST_CODE = 123
 const val FLAG = 0
-
+const val DEFAULT_INTERVAL:Long = 1
 const val CHANNEL_ID = "Country_notificaiont_id"

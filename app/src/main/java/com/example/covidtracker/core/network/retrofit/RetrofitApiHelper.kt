@@ -17,6 +17,4 @@ class RetrofitApiHelper (val apiService: ApiService) : NetworkServiceContract {
 
     override suspend fun getCountryHistoricalData(countryName: String): CountryHistorcalData =apiService.getCountryHistoricalData(countryName)
 
-
-
 }

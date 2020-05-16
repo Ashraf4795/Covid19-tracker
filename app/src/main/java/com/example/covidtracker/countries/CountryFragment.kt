@@ -34,7 +34,7 @@ class CountryFragment : Fragment() {
     private lateinit var viewModel: CountryViewModel
     private var countriesData: List<CountryData> = ArrayList<CountryData>()
     private lateinit var adapter: CountriesAdapter
-
+    private val REX = "[^A-Za-z]"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -91,7 +91,7 @@ class CountryFragment : Fragment() {
 
         searchTxt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                filter(p0.toString());
+                filter(p0.toString().trim())
 
             }
 

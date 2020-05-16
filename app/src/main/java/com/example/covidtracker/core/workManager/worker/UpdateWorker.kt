@@ -24,9 +24,11 @@ class UpdateWorker (val context: Context,workerParameters: WorkerParameters): Co
 
     companion object {
         fun run (interval:Long,timeUnit:TimeUnit,context: Context){
-            //TODO: make constraints dynmic as param input
+
             val constraints = Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED).build()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .setRequiresDeviceIdle(false)
+                .build()
 
             val updateDataRequest = PeriodicWorkRequestBuilder<UpdateWorker>(interval,timeUnit)
                 .setConstraints(constraints)

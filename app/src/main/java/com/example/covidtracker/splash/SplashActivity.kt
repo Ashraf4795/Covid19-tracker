@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.example.covidtracker.R
 import com.example.covidtracker.core.COUNTRY_DATA_EXTRA_KEY
+import com.example.covidtracker.core.DEFAULT_INTERVAL
 import com.example.covidtracker.core.GLOBAL_DATA_EXTRA_KEY
 import com.example.covidtracker.core.ViewModelFactory
 import com.example.covidtracker.core.local.DatabaseBuilder
@@ -85,7 +86,7 @@ class SplashActivity : AppCompatActivity() {
                     if (it.data != null) {
                         Log.i(TAG,"Status Success")
                         goToMain()
-                        viewModel.startUpdateWorker(15, TimeUnit.MINUTES, applicationContext)
+                        viewModel.startUpdateWorker(1, TimeUnit.HOURS, applicationContext)
                     }
                 }
                 Status.ERROR -> {
