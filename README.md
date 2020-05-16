@@ -14,6 +14,7 @@ Covid-19 is an android app to view world wide updated data about covid-19, and v
 
   - Unit Testing
   - UI Testing
+  - DI (e.g Dagger2)
   - Map statistics
   - you are free to come up with any contribution idea that helps the app.
 
