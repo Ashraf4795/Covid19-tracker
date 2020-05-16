@@ -26,6 +26,7 @@ Covid-19 uses a number of Libraries to work properly:
 * Room
 * Retrofit
 * Work manager
+* Navigation Component
 * lottie
 * material design
 * notification
