@@ -1,0 +1,38 @@
+interface ILocalData {
+
+    fun <T> getCollectionOfItems():T
+    fun get():Object
+
+}
+
+
+interface IRemoteData {
+
+    fun <T> getItem():T
+}
+
+class RemoteData:IRemoteData {
+
+    fun getItem():Single<Resource>{
+        //logic
+        return data // single(Resource(data,status.message))
+    }
+}
+
+DataManager (val ILocalData): IDataMagager{
+    ILocalData
+
+
+    fun getCollectionOFItem():Single<DataResult(data)>{
+       return ILocalData.getCollectionOfItem()
+    }
+
+}
+
+LocalData:ILocalData {
+
+    fun <T> getCollectionOfItems():Single{
+
+    }
+
+}

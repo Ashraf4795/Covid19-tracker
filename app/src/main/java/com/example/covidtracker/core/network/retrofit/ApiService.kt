@@ -6,6 +6,7 @@ import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.core.models.GlobalHistoricalData
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Url
 
 interface ApiService {
 

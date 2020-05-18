@@ -15,6 +15,7 @@ interface NetworkServiceContract{
     suspend fun getCountryData(countryName:String) : CountryData
 
     suspend fun getGlobalHistoricalData():GlobalHistoricalData
+
     suspend fun getCountryHistoricalData(countryName:String):CountryHistorcalData
 
 }

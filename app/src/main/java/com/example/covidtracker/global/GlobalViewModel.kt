@@ -22,7 +22,6 @@ import java.util.concurrent.TimeUnit
 
 // global fragment viewModel
 class GlobalViewModel (val repository: Repository) :ViewModel(){
-
     val globalMutableData:MutableLiveData<GlobalData> = MutableLiveData()
 
     fun getGlobalDataWithCountriesData()= liveData(Dispatchers.IO) {

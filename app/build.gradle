@@ -100,9 +100,11 @@ dependencies {
     //MPAndroid chart lib
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 
-
     //progress chart
     implementation 'com.ramijemli.percentagechartview:percentagechartview:0.3.0'
 
+    //dagger2
+    implementation 'com.google.dagger:dagger:2.27'
+    kapt 'com.google.dagger:dagger-compiler:2.27'
 
 }

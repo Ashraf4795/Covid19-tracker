@@ -17,17 +17,17 @@ class Repository(val networkContract : NetworkServiceContract,val localContract:
     suspend fun getGlobalDataFromNetwork() = networkContract.getGlobalData()
 
     //get Countries data
-    suspend fun  getCountriesDataFromNetwork() = networkContract.getCountriesData()
+    suspend fun getCountriesDataFromNetwork() = networkContract.getCountriesData()
 
     //get country data with name
     suspend fun getCountryDataFromNetwork(countryName:String) = networkContract.getCountryData(countryName)
 
     //get global historical data
-    suspend fun  getGlobalHistoricalData():GlobalHistoricalData =
+    suspend fun getGlobalHistoricalData(): GlobalHistoricalData =
         networkContract.getGlobalHistoricalData()
 
     //get Country Historcal Data
-    suspend fun  getCountryHistoricalData(countryName: String):CountryHistorcalData =
+    suspend fun getCountryHistoricalData(countryName: String): CountryHistorcalData =
         networkContract.getCountryHistoricalData(countryName)
 
 
@@ -51,7 +51,7 @@ class Repository(val networkContract : NetworkServiceContract,val localContract:
     }
 
     //get all countries from Database
-    suspend fun getCountriesDataFromDataBase():List<CountryData> = localContract.getCountries()
+    suspend fun getCountriesDataFromDataBase(): List<CountryData> = localContract.getCountries()
 
     // delete all countreis form database
     suspend fun deleteCountriesFromDataBase() {
@@ -59,17 +59,17 @@ class Repository(val networkContract : NetworkServiceContract,val localContract:
     }
 
     //insert country to subscrip table
-    suspend fun insertToSubscripTable(subscripEntity: SubscripEntity){
+    suspend fun insertToSubscripTable(subscripEntity: SubscripEntity) {
         localContract.insertToSubscripTable(subscripEntity)
     }
 
     // get all subscriped countries
-    suspend fun getSubscripedCountries() = GlobalScope.async(Dispatchers.IO){
+    suspend fun getSubscripedCountries() = GlobalScope.async(Dispatchers.IO) {
         localContract.getSubscriptedCountry()
     }.await()
 
     //refresh data function
-    suspend fun refreshData ():Pair<GlobalData,List<CountryData>>{
+    suspend fun refreshData(): Pair<GlobalData, List<CountryData>> {
         val countriesData = GlobalScope.async(Dispatchers.IO) {
             getCountriesDataFromNetwork()
         }.await()
@@ -78,29 +78,29 @@ class Repository(val networkContract : NetworkServiceContract,val localContract:
             getGlobalDataFromNetwork()
         }.await()
 
-        if (countriesData.count()>0) {
-            Log.d("refresh","insert countries :: " + countriesData.toString())
+        if (countriesData.count() > 0) {
+            Log.d("refresh", "insert countries :: " + countriesData.toString())
             insertCountiesToDataBase(countriesData)
         }
-        Log.d("refresh","insert GlobapData :: " + globalData.toString())
+        Log.d("refresh", "insert GlobapData :: " + globalData.toString())
         insertGlobalToDataDase(globalData)
-        return Pair(globalData,countriesData)
+        return Pair(globalData, countriesData)
     }
 
 
     //check if subscribed or not
-    suspend fun isSubscribed(countryName: String)=GlobalScope.async(Dispatchers.IO) {
+    suspend fun isSubscribed(countryName: String) = GlobalScope.async(Dispatchers.IO) {
         localContract.isSubscribed(countryName)
     }.await()
 
     //delete subscribed country
-    suspend fun deleteSubscribedCountry(countryName: String) =GlobalScope.async(Dispatchers.IO) {
+    suspend fun deleteSubscribedCountry(countryName: String) = GlobalScope.async(Dispatchers.IO) {
         localContract.deleteSubscribeCountry(countryName)
     }.await()
 
     suspend fun replaceOldSubscribedCountriesWithUpdatedCountries(notifiedCountries: List<SubscripEntity>) {
-        withContext(Dispatchers.IO){
-            notifiedCountries.forEach{
+        withContext(Dispatchers.IO) {
+            notifiedCountries.forEach {
                 localContract.deleteSubscribeCountry(it.country)
                 localContract.insertToSubscripTable(it)
             }
