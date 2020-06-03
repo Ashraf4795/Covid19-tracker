@@ -5,8 +5,9 @@ import com.example.covidtracker.core.models.CountryHistorcalData
 import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.core.models.GlobalHistoricalData
 import com.example.covidtracker.core.network.NetworkServiceContract
+import javax.inject.Inject
 
-class RetrofitApiHelper (val apiService: ApiService) : NetworkServiceContract {
+class RetrofitApiHelper @Inject constructor(val apiService: ApiService) : NetworkServiceContract {
 
     override suspend fun getGlobalData() = apiService.getGlobalData()
 

@@ -18,10 +18,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 
 // global fragment viewModel
-class GlobalViewModel (val repository: Repository) :ViewModel(){
+class GlobalViewModel @Inject constructor(val repository: Repository) :ViewModel(){
     val globalMutableData:MutableLiveData<GlobalData> = MutableLiveData()
 
     fun getGlobalDataWithCountriesData()= liveData(Dispatchers.IO) {

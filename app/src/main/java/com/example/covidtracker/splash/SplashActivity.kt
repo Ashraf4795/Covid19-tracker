@@ -1,5 +1,6 @@
 package com.example.covidtracker.splash
 
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
@@ -48,8 +49,6 @@ class SplashActivity : AppCompatActivity() {
             checkConnectionAndGetData()
         }
     }
-
-
     override fun onResume() {
         super.onResume()
         checkConnectionAndGetData()
@@ -58,7 +57,7 @@ class SplashActivity : AppCompatActivity() {
     private fun checkConnectionAndGetData() {
         if (Helper.isConnected(this)) {
             Toast.makeText(this, "Connected", Toast.LENGTH_LONG).show()
-            getData()
+            getData(this)
         } else {
             //todo show retry button
             showNoConnectionLayout()
@@ -77,7 +76,7 @@ class SplashActivity : AppCompatActivity() {
         splash_animation_id.visibility = View.GONE
     }
 
-    private fun getData() {
+    private fun getData(activityContext: Context) {
         Log.i(TAG,"getData")
         removeNoConnectionLayoutIfVisible()
         viewModel.getGlobalDataWithCountriesData().observe(this, Observer {
@@ -86,7 +85,7 @@ class SplashActivity : AppCompatActivity() {
                     if (it.data != null) {
                         Log.i(TAG,"Status Success")
                         goToMain()
-                        viewModel.startUpdateWorker(1, TimeUnit.HOURS, applicationContext)
+                        viewModel.startUpdateWorker(1, TimeUnit.HOURS, activityContext)
                     }
                 }
                 Status.ERROR -> {

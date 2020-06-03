@@ -15,3 +15,5 @@ const val REQUEST_CODE = 123
 const val FLAG = 0
 const val DEFAULT_INTERVAL:Long = 1
 const val CHANNEL_ID = "Country_notificaiont_id"
+const val globalDataTableName = "globalData"
+

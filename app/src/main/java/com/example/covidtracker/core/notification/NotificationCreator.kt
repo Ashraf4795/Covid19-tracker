@@ -38,6 +38,9 @@ class NotificationCreator (val context: Context){
             priority = NotificationCompat.PRIORITY_DEFAULT // 7
         }.build()
         return notification
+        //run on a single thread and run serialy
+
+
     }
 
 

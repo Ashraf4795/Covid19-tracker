@@ -8,9 +8,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 
-class Repository(val networkContract : NetworkServiceContract,val localContract:LocalDataBaseContract){
+class Repository @Inject constructor(val networkContract : NetworkServiceContract, val localContract:LocalDataBaseContract){
 
     // Data From Network
     //get Global data

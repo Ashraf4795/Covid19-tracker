@@ -4,6 +4,7 @@ import com.example.covidtracker.core.models.CountryData
 import com.example.covidtracker.core.models.CountryHistorcalData
 import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.core.models.GlobalHistoricalData
+import javax.inject.Inject
 
 interface NetworkServiceContract{
 

@@ -1,5 +1,6 @@
 package com.example.covidtracker.global
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -32,6 +33,7 @@ import com.example.covidtracker.core.models.GlobalData
 import com.example.covidtracker.core.models.GlobalHistoricalData
 import com.example.covidtracker.core.network.retrofit.RetrofitApiHelper
 import com.example.covidtracker.core.network.retrofit.RetrofitBuilder
+import com.example.covidtracker.di.application.BaseApplication
 import com.example.covidtracker.setting.Setting
 import com.example.covidtracker.utils.Helper
 import com.example.covidtracker.utils.Status
@@ -39,10 +41,11 @@ import kotlinx.android.synthetic.main.active_serious_layout.*
 import kotlinx.android.synthetic.main.fragment_global.*
 import kotlinx.android.synthetic.main.statistics_card.*
 import kotlinx.android.synthetic.main.total_card.*
+import javax.inject.Inject
 
 class GlobalFragment : Fragment(), Refreshable {
 
-    private lateinit var viewModel: GlobalViewModel
+    @Inject private lateinit var viewModel: GlobalViewModel
     private lateinit var globalData: GlobalData
 
     //TODO:1- get countries data ------done
@@ -61,6 +64,12 @@ class GlobalFragment : Fragment(), Refreshable {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_global, container, false)
+    }
+
+    override fun onAttach(context: Context) {
+        (requireContext() as BaseApplication).appComponent.inject(this)
+        super.onAttach(context)
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

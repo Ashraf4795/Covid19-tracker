@@ -3,7 +3,9 @@ package com.example.covidtracker.core.local
 import android.content.Context
 import androidx.room.Room
 import com.example.covidtracker.core.DATABASE_NAME
+import javax.inject.Singleton
 
+@Singleton
 object DatabaseBuilder {
     private var INSTANCE: AppDataBase? = null
 
@@ -22,5 +24,6 @@ object DatabaseBuilder {
             AppDataBase::class.java,
             DATABASE_NAME
         ).build()
+
 
 }
