@@ -3,6 +3,18 @@
 ![Contributors](https://img.shields.io/badge/Contributors-3-blue)   ![release](https://img.shields.io/badge/release-1-gree)
 
 Covid-19 is an android app to view world wide updated data about covid-19, and view all details about every country, subscribe to any number of countirs to get notification if any updates occures immediately .
+
+
+
+
+![Farmers Market Finder Demo](demo.gif)
+
+
+
+
+
+
+
 # Features
 
   - World Wide data about covid-19
